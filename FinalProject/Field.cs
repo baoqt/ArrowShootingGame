@@ -16,17 +16,16 @@ namespace FinalProject
     static class Field
     {
         private static double xFieldBoundaries = 10.0;
-        private static double zFieldBoundaries = 300.0;
 
         /// <summary>
         /// Function returns whether the arrow is within bounds
         /// of the shooting area as a bool.
         /// </summary>
         /// <param name="var">Arrow to be checked</param>
-        /// <returns></returns>
+        /// <returns>Whether the arrow is in the field as a bool</returns>
         public static bool OutOfBounds(Arrow var)
         {
-            if (((var.XPos > xFieldBoundaries) || (var.XPos < 0)) || var.YPos < 0)/* || (var.ZPos > zFieldBoundaries))*/
+            if (((var.XPos > xFieldBoundaries) || (var.XPos < 0)) || var.YPos < 0)
             {
                 return true;
             }

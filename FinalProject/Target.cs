@@ -15,6 +15,11 @@ namespace FinalProject
 {
     static class Target
     {
+        /// <summary>
+        /// Static class holds the positions of the targets.
+        /// They don't move in this game so there's no reason
+        /// to make or remake them anyway.
+        /// </summary>
         private static double target1XPos = 2.5;
         private static double target1YPos = 1.0;
         private static double target1ZPos = 25.0;
@@ -30,7 +35,7 @@ namespace FinalProject
         /// hit or 0 if no target is hit as an int.
         /// </summary>
         /// <param name="var">Arrow to be checked</param>
-        /// <returns></returns>
+        /// <returns>Which target was hit as an int</returns>
         public static int Hit(Arrow var)
         {
             if (Math.Abs(var.YPos - target1YPos) <= 1.0)

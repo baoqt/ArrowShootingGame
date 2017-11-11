@@ -22,6 +22,13 @@ namespace FinalProject
 {
     public partial class mainWindow : Form
     {
+        /// <summary>
+        /// Arrow is an object in case I want to have
+        /// multiple arrows at once for some reason.
+        /// ScoreTime is an object too so I can have
+        /// a collection of scores to read/write to json
+        /// or something.
+        /// </summary>
         Arrow arrow = new Arrow();
         ScoreTime scoreTime = new ScoreTime();
 
@@ -30,6 +37,13 @@ namespace FinalProject
             InitializeComponent();
         }
 
+        /// <summary>
+        /// playButton Initializes the game UI, the 
+        /// wind, and score. It also displays the 
+        /// initial arrow stats in the UI.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void playButton_Click(object sender, EventArgs e)
         {
             gameControlPanel.Visible = true;
@@ -39,21 +53,46 @@ namespace FinalProject
                                      $"{arrow.xVel:0.000}, {arrow.yVel:0.000}, {arrow.zVel:0.000} [X, Y, Z]\n" +
                                      $"{arrow.xAcc:0.000}, {arrow.yAcc:0.000}, {arrow.zAcc:0.000} [X, Y, Z]\n";
         }
-
+        /// <summary>
+        /// scoreButton lets the user check high scores.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void scoreButton_Click(object sender, EventArgs e)
         {
 
         }
 
+        /// <summary>
+        /// settingsButton lets the user enable/disable
+        /// the wind.
+        /// Calls up a new panel for settings UI.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void settingsButton_Click(object sender, EventArgs e)
         {
 
         }
+
+        /// <summary>
+        /// quitButton fully exits the game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void quitButton_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
 
+        /// <summary>
+        /// This quitButton just quits the current game, taking user
+        /// back to the main menu.
+        /// It disables game mechanics like wind and score and resets
+        /// them. Also makes the game UI invisible.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void quitGameButton_Click(object sender, EventArgs e)
         {
             gameControlPanel.Visible = false;
@@ -65,36 +104,72 @@ namespace FinalProject
             ArrowPositionBackgroundWorker.CancelAsync();
         }
 
+        /// <summary>
+        /// Adjusts the arrow angle up by a degree.
+        /// Also updates the angle stats on the UI.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void upButton_Click(object sender, EventArgs e)
         {
             arrow.ChangeAngle("up");
             angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
         }
 
+        /// <summary>
+        /// Adjusts the arrow angle right by a degree.
+        /// Also updates the angle stats on the UI.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void rightButton_Click(object sender, EventArgs e)
         {
             arrow.ChangeAngle("right");
             angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
         }
 
+        /// <summary>
+        /// Adjusts the arrow angle down by a degree.
+        /// Also updates the angle stats on the UI.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void downButton_Click(object sender, EventArgs e)
         {
             arrow.ChangeAngle("down");
             angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
         }
 
+        /// <summary>
+        /// Adjusts the arrow angle left by a degree.
+        /// Also updats the angle stats on the UI.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void leftButton_Click(object sender, EventArgs e)
         {
             arrow.ChangeAngle("left");
             angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
         }
 
+        /// <summary>
+        /// Calls the fire function from arrow class,
+        /// starting the arrow's flight.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void fireButton_Click(object sender, EventArgs e)
         {
             arrow.Fire();
             ArrowPositionBackgroundWorker.RunWorkerAsync();
         }
 
+        /// <summary>
+        /// All the previous functions but with keyboard shortcuts
+        /// instead of mouse clicks.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void mainWindow_KeyPress(object sender, KeyPressEventArgs e)
         {
             if (gameControlPanel.Visible)
@@ -125,6 +200,11 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Calls the wind update function every 2 seconds.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WindBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             Random range = new Random();
@@ -146,17 +226,34 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Updates the wind stats UI element.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void WindBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             windReading.Text = $"Wind: {Wind.XMag:0.000}m/s, {Wind.ZMag:0.000}m/s [X, Z]";
         }
 
+        /// <summary>
+        /// Increases the score tracker every second.
+        /// Also updates the UI element.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ScoreTimer_Tick(object sender, EventArgs e)
         {
             scoreTime.IncrementTime();
             ScoreTimerLabel.Text = $"{scoreTime.Hours:00}:{scoreTime.Minutes:00}:{scoreTime.Seconds:00}";
         }
 
+        /// <summary>
+        /// Updates the arrow's stats if it's not stationary.
+        /// Keeps doing this until it hits the ground.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ArrowPositionBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
@@ -176,17 +273,18 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Updates the arrow position, velocity, and acceleration stats
+        /// on the UI element.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ArrowPositionBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
             ArrowPositionTest.Text = $"{arrow.XPos:0.000}, {arrow.YPos:0.000}, {arrow.ZPos:0.000} [X, Y, Z]\n" +
                                      $"{arrow.xVel:0.000}, {arrow.yVel:0.000}, {arrow.zVel:0.000} [X, Y, Z]\n" +
                                      $"{arrow.xAcc:0.000}, {arrow.yAcc:0.000}, {arrow.zAcc:0.000} [X, Y, Z]\n" +
                                      $"Hit: {Target.Hit(arrow)}";
-        }
-
-        private void mainScreen_Click(object sender, EventArgs e)
-        {
-
         }
     }
 }

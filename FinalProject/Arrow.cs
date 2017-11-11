@@ -214,6 +214,10 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Function for testing, full stats shouldn't be shown in completed game
+        /// </summary>
+        /// <returns>All stats of the arrow</returns>
         public override string ToString()
         {
             return $"{XPos:0.000}, {YPos:0.000}, {ZPos:0.000} POS[X, Y, Z]\n" +

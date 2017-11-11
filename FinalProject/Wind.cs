@@ -12,6 +12,12 @@ namespace FinalProject
         private static double zMag;
         private static Random range = new Random();
 
+        /// <summary>
+        /// Static class handles the random wind.
+        /// Updates are done only when needed, and
+        /// there's only one wind so no need to new
+        /// one up.
+        /// </summary>
         public static double XMag
         {
             get
@@ -28,6 +34,13 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Function updates the wind stats based
+        /// on random rolls.
+        /// Small changes are kind of annoying already
+        /// so don't let it blow too strong or change
+        /// too quickly.
+        /// </summary>
         public static void UpdateWind()
         {
             int xRoll = range.Next(10);
@@ -82,6 +95,10 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Called when a game is finished or user quits.
+        /// Resets the wind for the next game.
+        /// </summary>
         public static void ResetWind()
         {
             xMag = 0.0;
