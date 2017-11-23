@@ -57,6 +57,13 @@
             this.ScoreTimerLabel = new System.Windows.Forms.Label();
             this.ArrowPositionTest = new System.Windows.Forms.Label();
             this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
+            this.SettingsPanel = new System.Windows.Forms.Panel();
+            this.SettingsLabel = new System.Windows.Forms.Label();
+            this.NormalModeButton = new System.Windows.Forms.Button();
+            this.HardModeButton = new System.Windows.Forms.Button();
+            this.ScoresControlPanel = new System.Windows.Forms.Panel();
+            this.BackButton = new System.Windows.Forms.Button();
+            this.ScoresLabel = new System.Windows.Forms.Label();
             this.mainMenuControlPanel.SuspendLayout();
             this.mainMenuLayoutPanel.SuspendLayout();
             this.mainMenuInnerLayoutPanel.SuspendLayout();
@@ -68,6 +75,8 @@
             this.dataWindow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
+            this.SettingsPanel.SuspendLayout();
+            this.ScoresControlPanel.SuspendLayout();
             this.SuspendLayout();
             // 
             // WindBackgroundWorker
@@ -404,7 +413,7 @@
             // 
             this.ArrowPositionTest.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ArrowPositionTest.AutoSize = true;
-            this.ArrowPositionTest.Location = new System.Drawing.Point(388, 516);
+            this.ArrowPositionTest.Location = new System.Drawing.Point(372, 532);
             this.ArrowPositionTest.Name = "ArrowPositionTest";
             this.ArrowPositionTest.Size = new System.Drawing.Size(79, 13);
             this.ArrowPositionTest.TabIndex = 8;
@@ -421,14 +430,90 @@
             this.BackgroundPictureBox.TabIndex = 9;
             this.BackgroundPictureBox.TabStop = false;
             // 
+            // SettingsPanel
+            // 
+            this.SettingsPanel.Controls.Add(this.HardModeButton);
+            this.SettingsPanel.Controls.Add(this.NormalModeButton);
+            this.SettingsPanel.Controls.Add(this.SettingsLabel);
+            this.SettingsPanel.Location = new System.Drawing.Point(821, 0);
+            this.SettingsPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.SettingsPanel.Name = "SettingsPanel";
+            this.SettingsPanel.Size = new System.Drawing.Size(172, 593);
+            this.SettingsPanel.TabIndex = 10;
+            this.SettingsPanel.Visible = false;
+            // 
+            // SettingsLabel
+            // 
+            this.SettingsLabel.AutoSize = true;
+            this.SettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SettingsLabel.Location = new System.Drawing.Point(20, 82);
+            this.SettingsLabel.Name = "SettingsLabel";
+            this.SettingsLabel.Size = new System.Drawing.Size(128, 20);
+            this.SettingsLabel.TabIndex = 0;
+            this.SettingsLabel.Text = "Difficulty Mode";
+            // 
+            // NormalModeButton
+            // 
+            this.NormalModeButton.Location = new System.Drawing.Point(43, 127);
+            this.NormalModeButton.Name = "NormalModeButton";
+            this.NormalModeButton.Size = new System.Drawing.Size(80, 39);
+            this.NormalModeButton.TabIndex = 1;
+            this.NormalModeButton.Text = "Normal Mode Without Wind";
+            this.NormalModeButton.UseVisualStyleBackColor = true;
+            this.NormalModeButton.Click += new System.EventHandler(this.NormalModeButton_Click);
+            // 
+            // HardModeButton
+            // 
+            this.HardModeButton.Location = new System.Drawing.Point(43, 197);
+            this.HardModeButton.Name = "HardModeButton";
+            this.HardModeButton.Size = new System.Drawing.Size(80, 39);
+            this.HardModeButton.TabIndex = 2;
+            this.HardModeButton.Text = "Hard Mode With Wind";
+            this.HardModeButton.UseVisualStyleBackColor = true;
+            this.HardModeButton.Click += new System.EventHandler(this.HardModeButton_Click);
+            // 
+            // ScoresControlPanel
+            // 
+            this.ScoresControlPanel.Controls.Add(this.BackButton);
+            this.ScoresControlPanel.Location = new System.Drawing.Point(821, 0);
+            this.ScoresControlPanel.Margin = new System.Windows.Forms.Padding(0);
+            this.ScoresControlPanel.Name = "ScoresControlPanel";
+            this.ScoresControlPanel.Size = new System.Drawing.Size(172, 593);
+            this.ScoresControlPanel.TabIndex = 12;
+            this.ScoresControlPanel.Visible = false;
+            // 
+            // BackButton
+            // 
+            this.BackButton.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.BackButton.Location = new System.Drawing.Point(51, 264);
+            this.BackButton.Name = "BackButton";
+            this.BackButton.Size = new System.Drawing.Size(75, 23);
+            this.BackButton.TabIndex = 0;
+            this.BackButton.Text = "Back";
+            this.BackButton.UseVisualStyleBackColor = true;
+            this.BackButton.Click += new System.EventHandler(this.BackButton_Click);
+            // 
+            // ScoresLabel
+            // 
+            this.ScoresLabel.AutoSize = true;
+            this.ScoresLabel.Location = new System.Drawing.Point(12, 9);
+            this.ScoresLabel.Name = "ScoresLabel";
+            this.ScoresLabel.Size = new System.Drawing.Size(0, 13);
+            this.ScoresLabel.TabIndex = 13;
+            // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1001, 601);
             this.Controls.Add(this.BackgroundPictureBox);
-            this.Controls.Add(this.ArrowPositionTest);
+            this.Controls.Add(this.ScoresLabel);
             this.Controls.Add(this.gameControlPanel);
+            this.Controls.Add(this.ScoresControlPanel);
+            this.Controls.Add(this.ArrowPositionTest);
+            this.Controls.Add(this.SettingsPanel);
             this.Controls.Add(this.mainMenuControlPanel);
             this.KeyPreview = true;
             this.MaximumSize = new System.Drawing.Size(1017, 640);
@@ -450,6 +535,9 @@
             this.dataWindow.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
+            this.SettingsPanel.ResumeLayout(false);
+            this.SettingsPanel.PerformLayout();
+            this.ScoresControlPanel.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -484,6 +572,13 @@
         private System.Windows.Forms.Label ScoreTimerLabel;
         private System.Windows.Forms.Label ArrowPositionTest;
         private System.Windows.Forms.PictureBox BackgroundPictureBox;
+        private System.Windows.Forms.Panel SettingsPanel;
+        private System.Windows.Forms.Button HardModeButton;
+        private System.Windows.Forms.Button NormalModeButton;
+        private System.Windows.Forms.Label SettingsLabel;
+        private System.Windows.Forms.Panel ScoresControlPanel;
+        private System.Windows.Forms.Button BackButton;
+        private System.Windows.Forms.Label ScoresLabel;
     }
 }
 

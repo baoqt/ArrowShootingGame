@@ -47,7 +47,6 @@ namespace FinalProject
         private void playButton_Click(object sender, EventArgs e)
         {
             gameControlPanel.Visible = true;
-            WindBackgroundWorker.RunWorkerAsync();
             ScoreTimer.Enabled = true;
             ArrowPositionTest.Text = $"{arrow.XPos:0.000}, {arrow.YPos:0.000}, {arrow.ZPos:0.000} [X, Y, Z]\n" +
                                      $"{arrow.xVel:0.000}, {arrow.yVel:0.000}, {arrow.zVel:0.000} [X, Y, Z]\n" +
@@ -55,12 +54,47 @@ namespace FinalProject
         }
         /// <summary>
         /// scoreButton lets the user check high scores.
+        /// Pulls the current high scores from a text file.
+        /// Creates a new file if it doesn't exist.
         /// </summary>
         /// <param name="sender"></param>
         /// <param name="e"></param>
         private void scoreButton_Click(object sender, EventArgs e)
         {
+            int scoreIndex = 0;
+            string[] lines = new string[11] { "HIGHSCORES",
+                                              "\n",
+                                              "AAA 00:00:00",
+                                              "\n",
+                                              "BBB 00:00:01",
+                                              "\n",
+                                              "CCC 00:00:02",
+                                              "\n",
+                                              "DDD 00:00:03",
+                                              "\n",
+                                              "EEE 00:00:04" };
 
+            try
+            {
+                lines = System.IO.File.ReadAllLines(@"highscores.txt");
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                System.IO.File.WriteAllLines(@"highscores.txt", lines);
+            }
+
+            ScoresLabel.Text = "";
+            foreach (string line in lines)
+            {
+                if (scoreIndex < 22)
+                {
+                    ScoresLabel.Text += line + "\n";
+                    scoreIndex++;
+                }
+            }
+
+            BackgroundPictureBox.Visible = false;
+            ScoresControlPanel.Visible = true;
         }
 
         /// <summary>
@@ -72,7 +106,7 @@ namespace FinalProject
         /// <param name="e"></param>
         private void settingsButton_Click(object sender, EventArgs e)
         {
-
+            SettingsPanel.Visible = true;
         }
 
         /// <summary>
@@ -285,6 +319,44 @@ namespace FinalProject
                                      $"{arrow.xVel:0.000}, {arrow.yVel:0.000}, {arrow.zVel:0.000} [X, Y, Z]\n" +
                                      $"{arrow.xAcc:0.000}, {arrow.yAcc:0.000}, {arrow.zAcc:0.000} [X, Y, Z]\n" +
                                      $"Hit: {Target.Hit(arrow)}";
+        }
+
+        /// <summary>
+        /// Disables the wind in gme.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void NormalModeButton_Click(object sender, EventArgs e)
+        {
+            WindBackgroundWorker.CancelAsync();
+            Wind.ResetWind();
+            windReading.Text = $"Wind: {Wind.XMag:0.000}m/s, {Wind.ZMag:0.000}m/s [X, Z]";
+            SettingsPanel.Visible = false;
+        }
+
+        /// <summary>
+        /// Enables the wind in game.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void HardModeButton_Click(object sender, EventArgs e)
+        {
+            if (!WindBackgroundWorker.IsBusy)
+            {
+                WindBackgroundWorker.RunWorkerAsync();
+            }
+            SettingsPanel.Visible = false;
+        }
+
+        /// <summary>
+        /// Returns from the high score menu.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void BackButton_Click(object sender, EventArgs e)
+        {
+            BackgroundPictureBox.Visible = true;
+            ScoresControlPanel.Visible = false;
         }
     }
 }
