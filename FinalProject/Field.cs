@@ -15,7 +15,7 @@ namespace FinalProject
 {
     static class Field
     {
-        private static double xFieldBoundaries = 10.0;
+        private const double xFieldBoundaries = 10.0;
 
         /// <summary>
         /// Function returns whether the arrow is within bounds

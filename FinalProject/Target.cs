@@ -20,15 +20,15 @@ namespace FinalProject
         /// They don't move in this game so there's no reason
         /// to make or remake them anyway.
         /// </summary>
-        private static double target1XPos = 2.5;
-        private static double target1YPos = 1.0;
-        private static double target1ZPos = 25.0;
-        private static double target2XPos = 7.5;
-        private static double target2YPos = 1.1;
-        private static double target2ZPos = 100.0;
-        private static double target3XPos = 5.0;
-        private static double target3YPos = 1.0;
-        private static double target3ZPos = 295.0;
+        private const double target1XPos = 2.5;
+        private const double target1YPos = 1.0;
+        private const double target1ZPos = 25.0;
+        private const double target2XPos = 7.5;
+        private const double target2YPos = 1.1;
+        private const double target2ZPos = 100.0;
+        private const double target3XPos = 5.0;
+        private const double target3YPos = 1.0;
+        private const double target3ZPos = 295.0;
 
         /// <summary>
         /// Function returns the number of the target
@@ -44,7 +44,7 @@ namespace FinalProject
                 {
                     if (Math.Abs(var.XPos - target1XPos) <= (1.0 - Math.Sin(Math.Abs(var.YPos - target1YPos))))
                     {
-                        return 1;
+                        return 0;
                     }
                 }
             }
@@ -54,7 +54,7 @@ namespace FinalProject
                 {
                     if (Math.Abs(var.XPos - target2XPos) <= (1.0 - Math.Sin(Math.Abs(var.YPos - target2YPos))))
                     {
-                        return 2;
+                        return 1;
                     }
                 }
             }
@@ -64,11 +64,11 @@ namespace FinalProject
                 {
                     if (Math.Abs(var.XPos - target3XPos) <= (1.0 - Math.Sin(Math.Abs(var.YPos - target3YPos))))
                     {
-                        return 3;
+                        return 2;
                     }
                 }
             }
-            return 0;
+            return -1;
         }
     }
 }

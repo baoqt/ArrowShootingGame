@@ -133,7 +133,7 @@ namespace FinalProject
             WindBackgroundWorker.CancelAsync();
             ScoreTimer.Enabled = false;
             Wind.ResetWind();
-            scoreTime.ResetTime();
+            scoreTime.Reset();
             ScoreTimerLabel.Text = "00:00:00";
             ArrowPositionBackgroundWorker.CancelAsync();
         }
@@ -267,6 +267,55 @@ namespace FinalProject
         /// <param name="e"></param>
         private void WindBackgroundWorker_ProgressChanged(object sender, ProgressChangedEventArgs e)
         {
+            double tempAngle = 0.0;
+            
+            if (Wind.XMag == 0)
+            {
+                tempAngle = 90;
+            }
+            else
+            {
+                tempAngle = ((Math.Atan(Wind.ZMag / Wind.XMag) / Math.PI) * 180.0);
+            }
+
+            if (((Wind.XMag < 0) && (Wind.ZMag >= 0)) || ((Wind.XMag <= 0) && (Wind.ZMag <= 0)))
+            {
+                tempAngle += 180.0;
+            }
+
+            if ((tempAngle < 112.5) && (tempAngle >= 67.5))
+            {
+                CompassPictureBox.Image = Properties.Resources.CompassNorth;
+            }
+            else if ((tempAngle < 67.5) && (tempAngle >= 22.5))
+            {
+                CompassPictureBox.Image = Properties.Resources.CompassNorthEast;
+            }
+            else if (((tempAngle < 22.5) && (tempAngle >= 0.0)) || (tempAngle < 360.0) && (tempAngle >= 337.5))
+            {
+                CompassPictureBox.Image = Properties.Resources.CompassEast;
+            }
+            else if ((tempAngle < 157.5) && (tempAngle >= 112.5))
+            {
+                CompassPictureBox.Image = Properties.Resources.CompassNorthWest;
+            }
+            else if ((tempAngle < 202.5) && (tempAngle >= 157.5))
+            {
+                CompassPictureBox.Image = Properties.Resources.CompassWest;
+            }
+            else if ((tempAngle < 247.5) && (tempAngle >= 202.5))
+            {
+                CompassPictureBox.Image = Properties.Resources.CompassSouthWest;
+            }
+            else if ((tempAngle < 292.5) && (tempAngle >= 247.5))
+            {
+                CompassPictureBox.Image = Properties.Resources.CompassSouth;
+            }
+            else if ((tempAngle < 337.5) && (tempAngle >= 292.5))
+            {
+                CompassPictureBox.Image = Properties.Resources.CompassSouthEast;
+            }
+
             windReading.Text = $"Wind: {Wind.XMag:0.000}m/s, {Wind.ZMag:0.000}m/s [X, Z]";
         }
 
@@ -278,7 +327,7 @@ namespace FinalProject
         /// <param name="e"></param>
         private void ScoreTimer_Tick(object sender, EventArgs e)
         {
-            scoreTime.IncrementTime();
+            scoreTime.Update();
             ScoreTimerLabel.Text = $"{scoreTime.Hours:00}:{scoreTime.Minutes:00}:{scoreTime.Seconds:00}";
         }
 
@@ -300,7 +349,7 @@ namespace FinalProject
                 }
                 else if (!arrow.Stationary)
                 {
-                    arrow.UpdateStats();
+                    arrow.Update();
                     worker.ReportProgress(0);
                 }
                 System.Threading.Thread.Sleep(4);
@@ -318,7 +367,7 @@ namespace FinalProject
             ArrowPositionTest.Text = $"{arrow.XPos:0.000}, {arrow.YPos:0.000}, {arrow.ZPos:0.000} [X, Y, Z]\n" +
                                      $"{arrow.xVel:0.000}, {arrow.yVel:0.000}, {arrow.zVel:0.000} [X, Y, Z]\n" +
                                      $"{arrow.xAcc:0.000}, {arrow.yAcc:0.000}, {arrow.zAcc:0.000} [X, Y, Z]\n" +
-                                     $"Hit: {Target.Hit(arrow)}";
+                                     $"Hit: {Target.Hit(arrow) + 1}";
         }
 
         /// <summary>
@@ -357,6 +406,18 @@ namespace FinalProject
         {
             BackgroundPictureBox.Visible = true;
             ScoresControlPanel.Visible = false;
+        }
+
+        private void CheatsButton_Click(object sender, EventArgs e)
+        {
+            if (CheatsButton.Text == "Enable Cheats (All shots hit)")
+            {
+                CheatsButton.Text = "Disable Cheats (Normal Shots)";
+            }
+            else
+            {
+                CheatsButton.Text = "Enable Cheats (All shots hit)";
+            }
         }
     }
 }

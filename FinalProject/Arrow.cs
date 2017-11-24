@@ -12,7 +12,7 @@ using System.Threading.Tasks;
 /// </summary>
 namespace FinalProject
 {
-    class Arrow
+    class Arrow : BackgroundObjects
     {
         private double xPos;
         private double yPos;
@@ -25,8 +25,8 @@ namespace FinalProject
         public double xAcc;
         public double yAcc;
         public double zAcc;
-        private static double Gravity;
-        private static double DragCoefficient;
+        private const double Gravity = -9.807;
+        private const double DragCoefficient = -0.0026;
         private bool stationary;
         private bool redrawn;
 
@@ -53,8 +53,6 @@ namespace FinalProject
             xAcc = 0.0;
             yAcc = 0.0;
             zAcc = 0.0;
-            Gravity = -9.807;
-            DragCoefficient = -0.0026;
             stationary = true;
             redrawn = false;
         }
@@ -121,7 +119,7 @@ namespace FinalProject
         /// called once every 0.004 seconds. Also checks and handles 
         /// if the arrow has gone out of bounds or hit a target.
         /// </summary>
-        public void UpdateStats()
+        public override void Update()
         {
             double timeConstant = 0.004;
 
@@ -138,7 +136,7 @@ namespace FinalProject
             yAcc += (DragCoefficient * Math.Pow(yVel, 2) + Gravity) * timeConstant;
             zAcc += DragCoefficient * Math.Pow(zVel, 2) * timeConstant;
 
-            if (Field.OutOfBounds(this) || (Target.Hit(this) != 0))
+            if (Field.OutOfBounds(this) || (Target.Hit(this) != -1))
             {
                 xVel = 0.0;
                 yVel = 0.0;
@@ -149,11 +147,31 @@ namespace FinalProject
                 stationary = true;
                 redrawn = true;
 
-                if (Target.Hit(this) != 0)
+                if (Target.Hit(this) != -1)
                 {
                     /// DrawStuckArrow(Target.Hit(this), this);
                 }
             }
+        }
+
+        /// <summary>
+        /// Resets the arrow's stats in case of emergency.
+        /// </summary>
+        public override void Reset()
+        {
+            xPos = 5.0;
+            yPos = 1.0;
+            zPos = 0.0;
+            xAngle = 90.0;
+            yAngle = 90.0;
+            xVel = 0.0;
+            yVel = 0.0;
+            zVel = 0.0;
+            xAcc = 0.0;
+            yAcc = 0.0;
+            zAcc = 0.0;
+            stationary = true;
+            redrawn = false;
         }
 
         /// <summary>
@@ -222,7 +240,7 @@ namespace FinalProject
         {
             return $"{XPos:0.000}, {YPos:0.000}, {ZPos:0.000} POS[X, Y, Z]\n" +
                    $"{xVel:0.000}, {yVel:0.000}, {zVel:0.000} VEL[X, Y, Z]\n" +
-                   $"{xAcc:0.000}, {yAcc:0.000}, {zAcc:0.000} ACC[X, Y, Z]\n"; ;
+                   $"{xAcc:0.000}, {yAcc:0.000}, {zAcc:0.000} ACC[X, Y, Z]\n";
         }
     }
 }

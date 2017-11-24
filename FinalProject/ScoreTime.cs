@@ -13,7 +13,7 @@ using System.Threading.Tasks;
 /// </summary>
 namespace FinalProject
 {
-    class ScoreTime
+    class ScoreTime : BackgroundObjects
     {
         private int seconds;
         private int minutes;
@@ -58,7 +58,7 @@ namespace FinalProject
         /// <summary>
         /// Called every second.
         /// </summary>
-        public void IncrementTime()
+        public override void Update()
         {
             if (seconds == 59)
             {
@@ -80,7 +80,7 @@ namespace FinalProject
         /// <summary>
         /// Called when the game finishes or the user quits.
         /// </summary>
-        public void ResetTime()
+        public override void Reset()
         {
             seconds = 0;
             minutes = 0;

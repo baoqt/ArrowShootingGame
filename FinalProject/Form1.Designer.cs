@@ -29,6 +29,7 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
+            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(mainWindow));
             this.WindBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.ScoreTimer = new System.Windows.Forms.Timer(this.components);
             this.ArrowPositionBackgroundWorker = new System.ComponentModel.BackgroundWorker();
@@ -50,20 +51,23 @@
             this.upButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.quitGameButton = new System.Windows.Forms.Button();
-            this.dataWindow = new System.Windows.Forms.TableLayoutPanel();
             this.angleReading = new System.Windows.Forms.Label();
             this.windReading = new System.Windows.Forms.Label();
             this.CompassPictureBox = new System.Windows.Forms.PictureBox();
-            this.ScoreTimerLabel = new System.Windows.Forms.Label();
+            this.DataPanel1 = new System.Windows.Forms.Panel();
             this.ArrowPositionTest = new System.Windows.Forms.Label();
+            this.ScoreTimerLabel = new System.Windows.Forms.Label();
             this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
             this.SettingsPanel = new System.Windows.Forms.Panel();
-            this.SettingsLabel = new System.Windows.Forms.Label();
-            this.NormalModeButton = new System.Windows.Forms.Button();
+            this.CheatsButton = new System.Windows.Forms.Button();
             this.HardModeButton = new System.Windows.Forms.Button();
+            this.NormalModeButton = new System.Windows.Forms.Button();
+            this.SettingsLabel = new System.Windows.Forms.Label();
             this.ScoresControlPanel = new System.Windows.Forms.Panel();
             this.BackButton = new System.Windows.Forms.Button();
             this.ScoresLabel = new System.Windows.Forms.Label();
+            this.splitter1 = new System.Windows.Forms.Splitter();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
             this.mainMenuControlPanel.SuspendLayout();
             this.mainMenuLayoutPanel.SuspendLayout();
             this.mainMenuInnerLayoutPanel.SuspendLayout();
@@ -72,11 +76,12 @@
             this.gameInnerLayoutPanel.SuspendLayout();
             this.ganeInnerLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
-            this.dataWindow.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).BeginInit();
+            this.DataPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
             this.SettingsPanel.SuspendLayout();
             this.ScoresControlPanel.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             this.SuspendLayout();
             // 
             // WindBackgroundWorker
@@ -207,13 +212,14 @@
             this.gameLayoutPanel.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.gameLayoutPanel.Controls.Add(this.gameInnerLayoutPanel, 0, 1);
             this.gameLayoutPanel.Controls.Add(this.tableLayoutPanel3, 0, 2);
-            this.gameLayoutPanel.Controls.Add(this.ScoreTimerLabel, 0, 0);
+            this.gameLayoutPanel.Controls.Add(this.DataPanel1, 0, 0);
             this.gameLayoutPanel.Dock = System.Windows.Forms.DockStyle.Fill;
             this.gameLayoutPanel.Location = new System.Drawing.Point(0, 0);
             this.gameLayoutPanel.Name = "gameLayoutPanel";
             this.gameLayoutPanel.RowCount = 3;
             this.gameLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 175F));
             this.gameLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 180F));
+            this.gameLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.gameLayoutPanel.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.gameLayoutPanel.Size = new System.Drawing.Size(172, 593);
             this.gameLayoutPanel.TabIndex = 5;
@@ -320,7 +326,7 @@
             this.tableLayoutPanel3.ColumnCount = 1;
             this.tableLayoutPanel3.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
             this.tableLayoutPanel3.Controls.Add(this.quitGameButton, 0, 1);
-            this.tableLayoutPanel3.Controls.Add(this.dataWindow, 0, 0);
+            this.tableLayoutPanel3.Controls.Add(this.tableLayoutPanel1, 0, 0);
             this.tableLayoutPanel3.Dock = System.Windows.Forms.DockStyle.Fill;
             this.tableLayoutPanel3.Location = new System.Drawing.Point(0, 355);
             this.tableLayoutPanel3.Margin = new System.Windows.Forms.Padding(0);
@@ -328,6 +334,7 @@
             this.tableLayoutPanel3.RowCount = 2;
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 80F));
             this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 20F));
+            this.tableLayoutPanel3.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 20F));
             this.tableLayoutPanel3.Size = new System.Drawing.Size(172, 238);
             this.tableLayoutPanel3.TabIndex = 1;
             // 
@@ -343,87 +350,77 @@
             this.quitGameButton.UseVisualStyleBackColor = true;
             this.quitGameButton.Click += new System.EventHandler(this.quitGameButton_Click);
             // 
-            // dataWindow
-            // 
-            this.dataWindow.ColumnCount = 1;
-            this.dataWindow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.dataWindow.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.dataWindow.Controls.Add(this.angleReading, 0, 0);
-            this.dataWindow.Controls.Add(this.windReading, 0, 2);
-            this.dataWindow.Controls.Add(this.CompassPictureBox, 0, 1);
-            this.dataWindow.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.dataWindow.Location = new System.Drawing.Point(0, 0);
-            this.dataWindow.Margin = new System.Windows.Forms.Padding(0);
-            this.dataWindow.Name = "dataWindow";
-            this.dataWindow.RowCount = 3;
-            this.dataWindow.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 7.142857F));
-            this.dataWindow.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 92.85714F));
-            this.dataWindow.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 13F));
-            this.dataWindow.Size = new System.Drawing.Size(172, 190);
-            this.dataWindow.TabIndex = 1;
-            // 
             // angleReading
             // 
-            this.angleReading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.angleReading.AutoSize = true;
+            this.angleReading.Dock = System.Windows.Forms.DockStyle.Fill;
             this.angleReading.Location = new System.Drawing.Point(0, 0);
             this.angleReading.Margin = new System.Windows.Forms.Padding(0);
             this.angleReading.Name = "angleReading";
-            this.angleReading.Size = new System.Drawing.Size(172, 12);
-            this.angleReading.TabIndex = 2;
+            this.angleReading.Size = new System.Drawing.Size(172, 28);
+            this.angleReading.TabIndex = 17;
             this.angleReading.Text = "Starting Angle: 90°, 90° [X, Y]";
             this.angleReading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // windReading
             // 
-            this.windReading.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.windReading.AutoSize = true;
-            this.windReading.Location = new System.Drawing.Point(0, 177);
+            this.windReading.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.windReading.Location = new System.Drawing.Point(0, 162);
             this.windReading.Margin = new System.Windows.Forms.Padding(0);
             this.windReading.Name = "windReading";
-            this.windReading.Size = new System.Drawing.Size(172, 13);
-            this.windReading.TabIndex = 3;
+            this.windReading.Size = new System.Drawing.Size(172, 28);
+            this.windReading.TabIndex = 18;
             this.windReading.Text = "Wind: 0m/s, 0,m/s [X, Z]";
             this.windReading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // CompassPictureBox
             // 
-            this.CompassPictureBox.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.CompassPictureBox.Location = new System.Drawing.Point(0, 12);
+            this.CompassPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("CompassPictureBox.Image")));
+            this.CompassPictureBox.Location = new System.Drawing.Point(0, 28);
             this.CompassPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.CompassPictureBox.Name = "CompassPictureBox";
-            this.CompassPictureBox.Size = new System.Drawing.Size(172, 164);
-            this.CompassPictureBox.TabIndex = 4;
+            this.CompassPictureBox.Size = new System.Drawing.Size(172, 134);
+            this.CompassPictureBox.TabIndex = 15;
             this.CompassPictureBox.TabStop = false;
+            // 
+            // DataPanel1
+            // 
+            this.DataPanel1.Controls.Add(this.ArrowPositionTest);
+            this.DataPanel1.Controls.Add(this.ScoreTimerLabel);
+            this.DataPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.DataPanel1.Location = new System.Drawing.Point(0, 0);
+            this.DataPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.DataPanel1.Name = "DataPanel1";
+            this.DataPanel1.Size = new System.Drawing.Size(172, 175);
+            this.DataPanel1.TabIndex = 2;
+            // 
+            // ArrowPositionTest
+            // 
+            this.ArrowPositionTest.Anchor = System.Windows.Forms.AnchorStyles.None;
+            this.ArrowPositionTest.AutoSize = true;
+            this.ArrowPositionTest.Location = new System.Drawing.Point(12, 92);
+            this.ArrowPositionTest.Name = "ArrowPositionTest";
+            this.ArrowPositionTest.Size = new System.Drawing.Size(79, 13);
+            this.ArrowPositionTest.TabIndex = 16;
+            this.ArrowPositionTest.Text = "0, 0, 0 [X, Y, Z]";
+            this.ArrowPositionTest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // ScoreTimerLabel
             // 
             this.ScoreTimerLabel.Anchor = System.Windows.Forms.AnchorStyles.None;
             this.ScoreTimerLabel.AutoSize = true;
             this.ScoreTimerLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.ScoreTimerLabel.Location = new System.Drawing.Point(34, 75);
+            this.ScoreTimerLabel.Location = new System.Drawing.Point(36, 21);
             this.ScoreTimerLabel.Name = "ScoreTimerLabel";
             this.ScoreTimerLabel.Size = new System.Drawing.Size(104, 25);
-            this.ScoreTimerLabel.TabIndex = 2;
+            this.ScoreTimerLabel.TabIndex = 17;
             this.ScoreTimerLabel.Text = "00:00:00";
-            // 
-            // ArrowPositionTest
-            // 
-            this.ArrowPositionTest.Anchor = System.Windows.Forms.AnchorStyles.None;
-            this.ArrowPositionTest.AutoSize = true;
-            this.ArrowPositionTest.Location = new System.Drawing.Point(372, 532);
-            this.ArrowPositionTest.Name = "ArrowPositionTest";
-            this.ArrowPositionTest.Size = new System.Drawing.Size(79, 13);
-            this.ArrowPositionTest.TabIndex = 8;
-            this.ArrowPositionTest.Text = "0, 0, 0 [X, Y, Z]";
-            this.ArrowPositionTest.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
             // 
             // BackgroundPictureBox
             // 
-            this.BackgroundPictureBox.Image = global::FinalProject.Properties.Resources.Background;
-            this.BackgroundPictureBox.Location = new System.Drawing.Point(9, 9);
+            this.BackgroundPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("BackgroundPictureBox.Image")));
+            this.BackgroundPictureBox.Location = new System.Drawing.Point(12, 10);
             this.BackgroundPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.BackgroundPictureBox.Name = "BackgroundPictureBox";
             this.BackgroundPictureBox.Size = new System.Drawing.Size(800, 450);
@@ -432,6 +429,7 @@
             // 
             // SettingsPanel
             // 
+            this.SettingsPanel.Controls.Add(this.CheatsButton);
             this.SettingsPanel.Controls.Add(this.HardModeButton);
             this.SettingsPanel.Controls.Add(this.NormalModeButton);
             this.SettingsPanel.Controls.Add(this.SettingsLabel);
@@ -442,15 +440,25 @@
             this.SettingsPanel.TabIndex = 10;
             this.SettingsPanel.Visible = false;
             // 
-            // SettingsLabel
+            // CheatsButton
             // 
-            this.SettingsLabel.AutoSize = true;
-            this.SettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.SettingsLabel.Location = new System.Drawing.Point(20, 82);
-            this.SettingsLabel.Name = "SettingsLabel";
-            this.SettingsLabel.Size = new System.Drawing.Size(128, 20);
-            this.SettingsLabel.TabIndex = 0;
-            this.SettingsLabel.Text = "Difficulty Mode";
+            this.CheatsButton.Location = new System.Drawing.Point(33, 264);
+            this.CheatsButton.Name = "CheatsButton";
+            this.CheatsButton.Size = new System.Drawing.Size(99, 35);
+            this.CheatsButton.TabIndex = 3;
+            this.CheatsButton.Text = "Enable Cheats (All shots hit)";
+            this.CheatsButton.UseVisualStyleBackColor = true;
+            this.CheatsButton.Click += new System.EventHandler(this.CheatsButton_Click);
+            // 
+            // HardModeButton
+            // 
+            this.HardModeButton.Location = new System.Drawing.Point(43, 197);
+            this.HardModeButton.Name = "HardModeButton";
+            this.HardModeButton.Size = new System.Drawing.Size(80, 39);
+            this.HardModeButton.TabIndex = 2;
+            this.HardModeButton.Text = "Hard Mode With Wind";
+            this.HardModeButton.UseVisualStyleBackColor = true;
+            this.HardModeButton.Click += new System.EventHandler(this.HardModeButton_Click);
             // 
             // NormalModeButton
             // 
@@ -462,15 +470,15 @@
             this.NormalModeButton.UseVisualStyleBackColor = true;
             this.NormalModeButton.Click += new System.EventHandler(this.NormalModeButton_Click);
             // 
-            // HardModeButton
+            // SettingsLabel
             // 
-            this.HardModeButton.Location = new System.Drawing.Point(43, 197);
-            this.HardModeButton.Name = "HardModeButton";
-            this.HardModeButton.Size = new System.Drawing.Size(80, 39);
-            this.HardModeButton.TabIndex = 2;
-            this.HardModeButton.Text = "Hard Mode With Wind";
-            this.HardModeButton.UseVisualStyleBackColor = true;
-            this.HardModeButton.Click += new System.EventHandler(this.HardModeButton_Click);
+            this.SettingsLabel.AutoSize = true;
+            this.SettingsLabel.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.SettingsLabel.Location = new System.Drawing.Point(20, 82);
+            this.SettingsLabel.Name = "SettingsLabel";
+            this.SettingsLabel.Size = new System.Drawing.Size(128, 20);
+            this.SettingsLabel.TabIndex = 0;
+            this.SettingsLabel.Text = "Difficulty Mode";
             // 
             // ScoresControlPanel
             // 
@@ -503,18 +511,44 @@
             this.ScoresLabel.Size = new System.Drawing.Size(0, 13);
             this.ScoresLabel.TabIndex = 13;
             // 
+            // splitter1
+            // 
+            this.splitter1.Location = new System.Drawing.Point(0, 0);
+            this.splitter1.Name = "splitter1";
+            this.splitter1.Size = new System.Drawing.Size(3, 601);
+            this.splitter1.TabIndex = 14;
+            this.splitter1.TabStop = false;
+            // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.CompassPictureBox, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.angleReading, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.windReading, 0, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 134F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(172, 190);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1001, 601);
-            this.Controls.Add(this.BackgroundPictureBox);
+            this.Controls.Add(this.splitter1);
             this.Controls.Add(this.ScoresLabel);
             this.Controls.Add(this.gameControlPanel);
             this.Controls.Add(this.ScoresControlPanel);
-            this.Controls.Add(this.ArrowPositionTest);
             this.Controls.Add(this.SettingsPanel);
             this.Controls.Add(this.mainMenuControlPanel);
+            this.Controls.Add(this.BackgroundPictureBox);
             this.KeyPreview = true;
             this.MaximumSize = new System.Drawing.Size(1017, 640);
             this.MinimumSize = new System.Drawing.Size(1017, 640);
@@ -527,17 +561,18 @@
             this.mainMenuInnerLayoutPanel.ResumeLayout(false);
             this.gameControlPanel.ResumeLayout(false);
             this.gameLayoutPanel.ResumeLayout(false);
-            this.gameLayoutPanel.PerformLayout();
             this.gameInnerLayoutPanel.ResumeLayout(false);
             this.ganeInnerLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
-            this.dataWindow.ResumeLayout(false);
-            this.dataWindow.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).EndInit();
+            this.DataPanel1.ResumeLayout(false);
+            this.DataPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
             this.ScoresControlPanel.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -565,12 +600,6 @@
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button quitGameButton;
-        private System.Windows.Forms.TableLayoutPanel dataWindow;
-        private System.Windows.Forms.Label angleReading;
-        private System.Windows.Forms.Label windReading;
-        private System.Windows.Forms.PictureBox CompassPictureBox;
-        private System.Windows.Forms.Label ScoreTimerLabel;
-        private System.Windows.Forms.Label ArrowPositionTest;
         private System.Windows.Forms.PictureBox BackgroundPictureBox;
         private System.Windows.Forms.Panel SettingsPanel;
         private System.Windows.Forms.Button HardModeButton;
@@ -579,6 +608,15 @@
         private System.Windows.Forms.Panel ScoresControlPanel;
         private System.Windows.Forms.Button BackButton;
         private System.Windows.Forms.Label ScoresLabel;
+        private System.Windows.Forms.Button CheatsButton;
+        private System.Windows.Forms.Splitter splitter1;
+        private System.Windows.Forms.Label angleReading;
+        private System.Windows.Forms.Label windReading;
+        private System.Windows.Forms.PictureBox CompassPictureBox;
+        private System.Windows.Forms.Label ArrowPositionTest;
+        private System.Windows.Forms.Label ScoreTimerLabel;
+        private System.Windows.Forms.Panel DataPanel1;
+        private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
     }
 }
 
