@@ -65,15 +65,15 @@ namespace FinalProject
 
             if (zRoll > 7)
             {
-                zChange = 1.5;
+                zChange = 0.2;
             }
             else if (zRoll > 4)
             {
-                zChange = 0.75;
+                zChange = 0.1;
             }
             else if (zRoll > 2)
             {
-                zChange = 0.25;
+                zChange = 0.05;
             }
 
             if ((xDirec == 0) &&(xMag <= 100))
@@ -87,7 +87,7 @@ namespace FinalProject
 
             if ((zDirec == 0) && (zMag <= 100))
             {
-                zMag += xChange;
+                zMag += zChange;
             }
             else if ((zDirec == 1) && (zMag >= -100))
             {

@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Drawing;
 
 namespace FinalProject
 {
@@ -15,53 +16,145 @@ namespace FinalProject
 
         public ArrowInFlight()
         {
-            flightPath0 = new int[,] { { 1, 2, 3, 4, 5 },
-                                       { 1, 2, 3, 4, 5 } };
-            flightPath1 = new int[,] { { 1, 2, 3, 4, 5 },
-                                       { 1, 2, 3, 4, 5 } };
-            flightPath2 = new int[,] { { 1, 2, 3, 4, 5 },
-                                       { 1, 2, 3, 4, 5 } };
+            flightPath0 = new int[,] { { 174, 2, 3, 4, 5 },
+                                       { 233, 2, 3, 4, 5 } };
+            flightPath1 = new int[,] { { 174, 242, 312, 350, 362 },
+                                       { 233, 151, 120, 106, 109 } };
+            flightPath2 = new int[,] { { 174, 2, 3, 4, 5 },
+                                       { 233, 2, 3, 4, 5 } };
             xIndex = 0;
         } 
 
-        public override void Draw(int xPos, int yPos)
+        public override void Draw(Arrow arrow, mainWindow mainWindow)
         {
-            // ArrowInFlight.Position = newPosition;
-            // ArrowInFlight.Visible = true;
+            switch (DetermineFlightPath(arrow))
+            {
+                case -1:
+                    Reset(mainWindow);
+                    break;
+                case 0:
+                    mainWindow.ArrowInFlightPictureBox.Location = new Point(flightPath0[0, xIndex], flightPath0[1, xIndex]);
+                    break;
+                case 1:
+                    mainWindow.ArrowInFlightPictureBox.Location = new Point(flightPath1[0, xIndex], flightPath1[1, xIndex]);
+                    break;
+                case 2:
+                    mainWindow.ArrowInFlightPictureBox.Location = new Point(flightPath2[0, xIndex], flightPath2[1, xIndex]);
+                    break;
+                default:
+                    Reset(mainWindow);
+                    break;
+            }
         }
 
-        public override void Update(Arrow arrow)
+        public override void Update(Arrow arrow, mainWindow mainWindow)
         {
             if (DetermineFlightPath(arrow) == -1)
             {
-                Reset();
+                Reset(mainWindow);
             }
             else
             {
-                switch (DetermineFlightPath(arrow))
+                switch (xIndex)
                 {
                     case 0:
-                        Draw(flightPath0[0, xIndex], flightPath0[1, xIndex]);
+                        switch (DetermineFlightPath(arrow))
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_0;
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                Reset(mainWindow);
+                                break;
+                        }
+                        Draw(arrow, mainWindow);
+                        xIndex++;
                         break;
                     case 1:
-                        Draw(flightPath1[0, xIndex], flightPath1[1, xIndex]);
+                        switch (DetermineFlightPath(arrow))
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_1;
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                Reset(mainWindow);
+                                break;
+                        }
+                        Draw(arrow, mainWindow);
+                        xIndex++;
                         break;
                     case 2:
-                        Draw(flightPath2[0, xIndex], flightPath2[1, xIndex]);
+                        switch (DetermineFlightPath(arrow))
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_2;
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                Reset(mainWindow);
+                                break;
+                        }
+                        Draw(arrow, mainWindow);
+                        xIndex++;
+                        break;
+                    case 3:
+                        switch (DetermineFlightPath(arrow))
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_3;
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                Reset(mainWindow);
+                                break;
+                        }
+                        Draw(arrow, mainWindow);
+                        xIndex++;
+                        break;
+                    case 4:
+                        switch (DetermineFlightPath(arrow))
+                        {
+                            case 0:
+                                break;
+                            case 1:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_4;
+                                break;
+                            case 2:
+                                break;
+                            default:
+                                Reset(mainWindow);
+                                break;
+                        }
+                        Draw(arrow, mainWindow);
+                        xIndex++;
                         break;
                     default:
-                        Reset();
+                        Reset(mainWindow);
+                        mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_0;
                         break;
                 }
-                xIndex++;
             }
         }
 
-        public override void Reset()
+        public override void Reset(mainWindow mainWindow)
         {
             xIndex = 0;
-            // ArrowInFlight.Visible = false;
-            // ArrowInFlight.Position = origin;
+            mainWindow.ArrowInFlightPictureBox.Visible = false;
+            mainWindow.ArrowInFlightPictureBox.Location = new Point(flightPath0[0, 0], flightPath0[1, 0]);
         }
 
         /// <summary>

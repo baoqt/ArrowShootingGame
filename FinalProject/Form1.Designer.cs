@@ -51,13 +51,13 @@
             this.upButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.quitGameButton = new System.Windows.Forms.Button();
+            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.CompassPictureBox = new System.Windows.Forms.PictureBox();
             this.angleReading = new System.Windows.Forms.Label();
             this.windReading = new System.Windows.Forms.Label();
-            this.CompassPictureBox = new System.Windows.Forms.PictureBox();
             this.DataPanel1 = new System.Windows.Forms.Panel();
             this.ArrowPositionTest = new System.Windows.Forms.Label();
             this.ScoreTimerLabel = new System.Windows.Forms.Label();
-            this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
             this.SettingsPanel = new System.Windows.Forms.Panel();
             this.CheatsButton = new System.Windows.Forms.Button();
             this.HardModeButton = new System.Windows.Forms.Button();
@@ -67,7 +67,9 @@
             this.BackButton = new System.Windows.Forms.Button();
             this.ScoresLabel = new System.Windows.Forms.Label();
             this.splitter1 = new System.Windows.Forms.Splitter();
-            this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.ArrowInFlightPictureBox = new System.Windows.Forms.PictureBox();
+            this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
+            this.ArrowInFlightBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mainMenuControlPanel.SuspendLayout();
             this.mainMenuLayoutPanel.SuspendLayout();
             this.mainMenuInnerLayoutPanel.SuspendLayout();
@@ -76,12 +78,13 @@
             this.gameInnerLayoutPanel.SuspendLayout();
             this.ganeInnerLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
+            this.tableLayoutPanel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).BeginInit();
             this.DataPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
             this.SettingsPanel.SuspendLayout();
             this.ScoresControlPanel.SuspendLayout();
-            this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ArrowInFlightPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
             // WindBackgroundWorker
@@ -350,6 +353,34 @@
             this.quitGameButton.UseVisualStyleBackColor = true;
             this.quitGameButton.Click += new System.EventHandler(this.quitGameButton_Click);
             // 
+            // tableLayoutPanel1
+            // 
+            this.tableLayoutPanel1.ColumnCount = 1;
+            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
+            this.tableLayoutPanel1.Controls.Add(this.CompassPictureBox, 0, 1);
+            this.tableLayoutPanel1.Controls.Add(this.angleReading, 0, 0);
+            this.tableLayoutPanel1.Controls.Add(this.windReading, 0, 2);
+            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
+            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
+            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
+            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
+            this.tableLayoutPanel1.RowCount = 3;
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 134F));
+            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
+            this.tableLayoutPanel1.Size = new System.Drawing.Size(172, 190);
+            this.tableLayoutPanel1.TabIndex = 1;
+            // 
+            // CompassPictureBox
+            // 
+            this.CompassPictureBox.Image = global::FinalProject.Properties.Resources.CompassNorth;
+            this.CompassPictureBox.Location = new System.Drawing.Point(0, 28);
+            this.CompassPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.CompassPictureBox.Name = "CompassPictureBox";
+            this.CompassPictureBox.Size = new System.Drawing.Size(172, 134);
+            this.CompassPictureBox.TabIndex = 15;
+            this.CompassPictureBox.TabStop = false;
+            // 
             // angleReading
             // 
             this.angleReading.AutoSize = true;
@@ -373,16 +404,6 @@
             this.windReading.TabIndex = 18;
             this.windReading.Text = "Wind: 0m/s, 0,m/s [X, Z]";
             this.windReading.TextAlign = System.Drawing.ContentAlignment.MiddleCenter;
-            // 
-            // CompassPictureBox
-            // 
-            this.CompassPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("CompassPictureBox.Image")));
-            this.CompassPictureBox.Location = new System.Drawing.Point(0, 28);
-            this.CompassPictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.CompassPictureBox.Name = "CompassPictureBox";
-            this.CompassPictureBox.Size = new System.Drawing.Size(172, 134);
-            this.CompassPictureBox.TabIndex = 15;
-            this.CompassPictureBox.TabStop = false;
             // 
             // DataPanel1
             // 
@@ -416,16 +437,6 @@
             this.ScoreTimerLabel.Size = new System.Drawing.Size(104, 25);
             this.ScoreTimerLabel.TabIndex = 17;
             this.ScoreTimerLabel.Text = "00:00:00";
-            // 
-            // BackgroundPictureBox
-            // 
-            this.BackgroundPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("BackgroundPictureBox.Image")));
-            this.BackgroundPictureBox.Location = new System.Drawing.Point(12, 10);
-            this.BackgroundPictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.BackgroundPictureBox.Name = "BackgroundPictureBox";
-            this.BackgroundPictureBox.Size = new System.Drawing.Size(800, 450);
-            this.BackgroundPictureBox.TabIndex = 9;
-            this.BackgroundPictureBox.TabStop = false;
             // 
             // SettingsPanel
             // 
@@ -519,29 +530,40 @@
             this.splitter1.TabIndex = 14;
             this.splitter1.TabStop = false;
             // 
-            // tableLayoutPanel1
+            // ArrowInFlightPictureBox
             // 
-            this.tableLayoutPanel1.ColumnCount = 1;
-            this.tableLayoutPanel1.ColumnStyles.Add(new System.Windows.Forms.ColumnStyle(System.Windows.Forms.SizeType.Percent, 100F));
-            this.tableLayoutPanel1.Controls.Add(this.CompassPictureBox, 0, 1);
-            this.tableLayoutPanel1.Controls.Add(this.angleReading, 0, 0);
-            this.tableLayoutPanel1.Controls.Add(this.windReading, 0, 2);
-            this.tableLayoutPanel1.Dock = System.Windows.Forms.DockStyle.Fill;
-            this.tableLayoutPanel1.Location = new System.Drawing.Point(0, 0);
-            this.tableLayoutPanel1.Margin = new System.Windows.Forms.Padding(0);
-            this.tableLayoutPanel1.Name = "tableLayoutPanel1";
-            this.tableLayoutPanel1.RowCount = 3;
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Absolute, 134F));
-            this.tableLayoutPanel1.RowStyles.Add(new System.Windows.Forms.RowStyle(System.Windows.Forms.SizeType.Percent, 50F));
-            this.tableLayoutPanel1.Size = new System.Drawing.Size(172, 190);
-            this.tableLayoutPanel1.TabIndex = 1;
+            this.ArrowInFlightPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.ArrowInFlightPictureBox.Image = global::FinalProject.Properties.Resources.ArrowInFlight_Path1_0;
+            this.ArrowInFlightPictureBox.Location = new System.Drawing.Point(174, 233);
+            this.ArrowInFlightPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.ArrowInFlightPictureBox.Name = "ArrowInFlightPictureBox";
+            this.ArrowInFlightPictureBox.Size = new System.Drawing.Size(100, 100);
+            this.ArrowInFlightPictureBox.TabIndex = 15;
+            this.ArrowInFlightPictureBox.TabStop = false;
+            this.ArrowInFlightPictureBox.Visible = false;
+            // 
+            // BackgroundPictureBox
+            // 
+            this.BackgroundPictureBox.BackColor = System.Drawing.SystemColors.Control;
+            this.BackgroundPictureBox.Image = ((System.Drawing.Image)(resources.GetObject("BackgroundPictureBox.Image")));
+            this.BackgroundPictureBox.Location = new System.Drawing.Point(12, 10);
+            this.BackgroundPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.BackgroundPictureBox.Name = "BackgroundPictureBox";
+            this.BackgroundPictureBox.Size = new System.Drawing.Size(800, 450);
+            this.BackgroundPictureBox.TabIndex = 9;
+            this.BackgroundPictureBox.TabStop = false;
+            // 
+            // ArrowInFlightBackgroundWorker
+            // 
+            this.ArrowInFlightBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ArrowInFlightBackgroundWorker_DoWork);
             // 
             // mainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1001, 601);
+            this.Controls.Add(this.ArrowInFlightPictureBox);
             this.Controls.Add(this.splitter1);
             this.Controls.Add(this.ScoresLabel);
             this.Controls.Add(this.gameControlPanel);
@@ -564,15 +586,16 @@
             this.gameInnerLayoutPanel.ResumeLayout(false);
             this.ganeInnerLayoutPanel2.ResumeLayout(false);
             this.tableLayoutPanel3.ResumeLayout(false);
+            this.tableLayoutPanel1.ResumeLayout(false);
+            this.tableLayoutPanel1.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).EndInit();
             this.DataPanel1.ResumeLayout(false);
             this.DataPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
             this.ScoresControlPanel.ResumeLayout(false);
-            this.tableLayoutPanel1.ResumeLayout(false);
-            this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.ArrowInFlightPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -600,7 +623,7 @@
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button quitGameButton;
-        private System.Windows.Forms.PictureBox BackgroundPictureBox;
+        public System.Windows.Forms.PictureBox BackgroundPictureBox;
         private System.Windows.Forms.Panel SettingsPanel;
         private System.Windows.Forms.Button HardModeButton;
         private System.Windows.Forms.Button NormalModeButton;
@@ -617,6 +640,8 @@
         private System.Windows.Forms.Label ScoreTimerLabel;
         private System.Windows.Forms.Panel DataPanel1;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
+        public System.Windows.Forms.PictureBox ArrowInFlightPictureBox;
+        private System.ComponentModel.BackgroundWorker ArrowInFlightBackgroundWorker;
     }
 }
 

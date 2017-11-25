@@ -18,14 +18,14 @@ namespace FinalProject
             targethit1 = false;
             targethit2 = false;
         }
-        public override void Draw(int xPos, int yPos)
+        public override void Draw(Arrow arrow, mainWindow mainWindow)
         {
             // ArrowInTarget0.Visible = targetHit0;
             // ArrowInTarget1.Visible = targetHit1;
             // ArrowInTarget2.Visible = targetHit2;
         }
 
-        public override void Update(Arrow arrow)
+        public override void Update(Arrow arrow, mainWindow mainWindow)
         {
             switch (Target.Hit(arrow))
             {
@@ -39,12 +39,12 @@ namespace FinalProject
                     targethit2 = true;
                     break;
                 default:
-                    Reset();
+                    Reset(mainWindow);
                     break;
             }
         }
 
-        public override void Reset()
+        public override void Reset(mainWindow mainWindow)
         {
             targetHit0 = false;
             targethit1 = false;

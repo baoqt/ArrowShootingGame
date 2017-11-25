@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace FinalProject
 {
-    abstract class BackgroundObjects : InGameObjects
+    abstract class BackgroundObjects
     {
         /// <summary>
         /// Background processes update without any parameters.
@@ -14,6 +14,7 @@ namespace FinalProject
         /// </summary>
         /// <returns></returns>
         public abstract void Update();
+        public abstract void Reset();
         public abstract override string ToString();
     }
 }

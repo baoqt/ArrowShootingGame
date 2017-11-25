@@ -31,10 +31,12 @@ namespace FinalProject
         /// </summary>
         Arrow arrow = new Arrow();
         ScoreTime scoreTime = new ScoreTime();
+        ArrowInFlight arrowInFlight = new ArrowInFlight();
 
         public mainWindow()
         {
             InitializeComponent();
+            ArrowInFlightPictureBox.Parent = BackgroundPictureBox;
         }
 
         /// <summary>
@@ -194,8 +196,13 @@ namespace FinalProject
         /// <param name="e"></param>
         private void fireButton_Click(object sender, EventArgs e)
         {
-            arrow.Fire();
-            ArrowPositionBackgroundWorker.RunWorkerAsync();
+            if (!ArrowInFlightBackgroundWorker.IsBusy)
+            {
+                arrow.Fire();
+                ArrowPositionBackgroundWorker.RunWorkerAsync();
+                ArrowInFlightBackgroundWorker.RunWorkerAsync();
+                ArrowInFlightPictureBox.Visible = true;
+            }
         }
 
         /// <summary>
@@ -226,8 +233,14 @@ namespace FinalProject
                 }
                 else if (e.KeyChar == 'f')
                 {
-                    arrow.Fire();
-                    ArrowPositionBackgroundWorker.RunWorkerAsync();
+                    if (!ArrowInFlightBackgroundWorker.IsBusy)
+                    {
+                        arrow.Fire();
+                        ArrowPositionBackgroundWorker.RunWorkerAsync();
+                        ArrowInFlightBackgroundWorker.RunWorkerAsync();
+                        ArrowInFlightPictureBox.Visible = true;
+                    }
+
                 }
 
                 angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {90.0 + (90.0 - arrow.YAngle)}° [X, Y]";
@@ -417,6 +430,17 @@ namespace FinalProject
             else
             {
                 CheatsButton.Text = "Enable Cheats (All shots hit)";
+            }
+        }
+
+        private void ArrowInFlightBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            int frameIndex = 0;
+
+            for (frameIndex = 0; frameIndex < 6; frameIndex++)
+            {
+                arrowInFlight.Update(arrow, this);
+                System.Threading.Thread.Sleep(250);
             }
         }
     }
