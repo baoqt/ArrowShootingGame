@@ -130,5 +130,50 @@
   <ItemGroup>
     <None Include="Resources\ArrowInFlight_Path1_4.png" />
   </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowInFlight_Path0_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowInFlight_Path0_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowInFlight_Path0_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowInFlight_Path0_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowInFlight_Path0_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowInFlight_Path2_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowInFlight_Path2_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowInFlight_Path2_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowInFlight_Path2_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ArrowInFlight_Path2_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BowAnimation_0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BowAnimation_1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BowAnimation_2.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BowAnimation_3.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\BowAnimation_4.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

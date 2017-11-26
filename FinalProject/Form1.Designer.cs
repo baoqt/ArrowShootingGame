@@ -52,7 +52,6 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.quitGameButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
-            this.CompassPictureBox = new System.Windows.Forms.PictureBox();
             this.angleReading = new System.Windows.Forms.Label();
             this.windReading = new System.Windows.Forms.Label();
             this.DataPanel1 = new System.Windows.Forms.Panel();
@@ -66,10 +65,12 @@
             this.ScoresControlPanel = new System.Windows.Forms.Panel();
             this.BackButton = new System.Windows.Forms.Button();
             this.ScoresLabel = new System.Windows.Forms.Label();
-            this.splitter1 = new System.Windows.Forms.Splitter();
-            this.ArrowInFlightPictureBox = new System.Windows.Forms.PictureBox();
-            this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
             this.ArrowInFlightBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.ArrowInFlightPictureBox = new System.Windows.Forms.PictureBox();
+            this.BowAnimationPictureBox = new System.Windows.Forms.PictureBox();
+            this.CompassPictureBox = new System.Windows.Forms.PictureBox();
+            this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
+            this.BowAnimationBackgroundWorker = new System.ComponentModel.BackgroundWorker();
             this.mainMenuControlPanel.SuspendLayout();
             this.mainMenuLayoutPanel.SuspendLayout();
             this.mainMenuInnerLayoutPanel.SuspendLayout();
@@ -79,11 +80,12 @@
             this.ganeInnerLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).BeginInit();
             this.DataPanel1.SuspendLayout();
             this.SettingsPanel.SuspendLayout();
             this.ScoresControlPanel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.ArrowInFlightPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BowAnimationPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
             this.SuspendLayout();
             // 
@@ -371,16 +373,6 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(172, 190);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
-            // CompassPictureBox
-            // 
-            this.CompassPictureBox.Image = global::FinalProject.Properties.Resources.CompassNorth;
-            this.CompassPictureBox.Location = new System.Drawing.Point(0, 28);
-            this.CompassPictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.CompassPictureBox.Name = "CompassPictureBox";
-            this.CompassPictureBox.Size = new System.Drawing.Size(172, 134);
-            this.CompassPictureBox.TabIndex = 15;
-            this.CompassPictureBox.TabStop = false;
-            // 
             // angleReading
             // 
             this.angleReading.AutoSize = true;
@@ -522,25 +514,43 @@
             this.ScoresLabel.Size = new System.Drawing.Size(0, 13);
             this.ScoresLabel.TabIndex = 13;
             // 
-            // splitter1
+            // ArrowInFlightBackgroundWorker
             // 
-            this.splitter1.Location = new System.Drawing.Point(0, 0);
-            this.splitter1.Name = "splitter1";
-            this.splitter1.Size = new System.Drawing.Size(3, 601);
-            this.splitter1.TabIndex = 14;
-            this.splitter1.TabStop = false;
+            this.ArrowInFlightBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ArrowInFlightBackgroundWorker_DoWork);
             // 
             // ArrowInFlightPictureBox
             // 
             this.ArrowInFlightPictureBox.BackColor = System.Drawing.Color.Transparent;
             this.ArrowInFlightPictureBox.Image = global::FinalProject.Properties.Resources.ArrowInFlight_Path1_0;
-            this.ArrowInFlightPictureBox.Location = new System.Drawing.Point(174, 233);
+            this.ArrowInFlightPictureBox.Location = new System.Drawing.Point(1000, 1000);
             this.ArrowInFlightPictureBox.Margin = new System.Windows.Forms.Padding(0);
             this.ArrowInFlightPictureBox.Name = "ArrowInFlightPictureBox";
             this.ArrowInFlightPictureBox.Size = new System.Drawing.Size(100, 100);
             this.ArrowInFlightPictureBox.TabIndex = 15;
             this.ArrowInFlightPictureBox.TabStop = false;
             this.ArrowInFlightPictureBox.Visible = false;
+            // 
+            // BowAnimationPictureBox
+            // 
+            this.BowAnimationPictureBox.BackColor = System.Drawing.Color.Transparent;
+            this.BowAnimationPictureBox.Image = global::FinalProject.Properties.Resources.BowAnimation_0;
+            this.BowAnimationPictureBox.Location = new System.Drawing.Point(0, 0);
+            this.BowAnimationPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.BowAnimationPictureBox.Name = "BowAnimationPictureBox";
+            this.BowAnimationPictureBox.Size = new System.Drawing.Size(812, 460);
+            this.BowAnimationPictureBox.TabIndex = 16;
+            this.BowAnimationPictureBox.TabStop = false;
+            this.BowAnimationPictureBox.Visible = false;
+            // 
+            // CompassPictureBox
+            // 
+            this.CompassPictureBox.Image = global::FinalProject.Properties.Resources.CompassNorth;
+            this.CompassPictureBox.Location = new System.Drawing.Point(0, 28);
+            this.CompassPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.CompassPictureBox.Name = "CompassPictureBox";
+            this.CompassPictureBox.Size = new System.Drawing.Size(172, 134);
+            this.CompassPictureBox.TabIndex = 15;
+            this.CompassPictureBox.TabStop = false;
             // 
             // BackgroundPictureBox
             // 
@@ -553,9 +563,9 @@
             this.BackgroundPictureBox.TabIndex = 9;
             this.BackgroundPictureBox.TabStop = false;
             // 
-            // ArrowInFlightBackgroundWorker
+            // BowAnimationBackgroundWorker
             // 
-            this.ArrowInFlightBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ArrowInFlightBackgroundWorker_DoWork);
+            this.BowAnimationBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BowAnimationBackgroundWorker_DoWork);
             // 
             // mainWindow
             // 
@@ -564,7 +574,7 @@
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1001, 601);
             this.Controls.Add(this.ArrowInFlightPictureBox);
-            this.Controls.Add(this.splitter1);
+            this.Controls.Add(this.BowAnimationPictureBox);
             this.Controls.Add(this.ScoresLabel);
             this.Controls.Add(this.gameControlPanel);
             this.Controls.Add(this.ScoresControlPanel);
@@ -588,13 +598,14 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).EndInit();
             this.DataPanel1.ResumeLayout(false);
             this.DataPanel1.PerformLayout();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
             this.ScoresControlPanel.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.ArrowInFlightPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BowAnimationPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -632,7 +643,6 @@
         private System.Windows.Forms.Button BackButton;
         private System.Windows.Forms.Label ScoresLabel;
         private System.Windows.Forms.Button CheatsButton;
-        private System.Windows.Forms.Splitter splitter1;
         private System.Windows.Forms.Label angleReading;
         private System.Windows.Forms.Label windReading;
         private System.Windows.Forms.PictureBox CompassPictureBox;
@@ -642,6 +652,8 @@
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel1;
         public System.Windows.Forms.PictureBox ArrowInFlightPictureBox;
         private System.ComponentModel.BackgroundWorker ArrowInFlightBackgroundWorker;
+        private System.Windows.Forms.PictureBox BowAnimationPictureBox;
+        private System.ComponentModel.BackgroundWorker BowAnimationBackgroundWorker;
     }
 }
 

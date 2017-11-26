@@ -36,7 +36,8 @@ namespace FinalProject
         public mainWindow()
         {
             InitializeComponent();
-            ArrowInFlightPictureBox.Parent = BackgroundPictureBox;
+            ArrowInFlightPictureBox.Parent = BowAnimationPictureBox;
+            BowAnimationPictureBox.Parent = BackgroundPictureBox;
         }
 
         /// <summary>
@@ -49,6 +50,7 @@ namespace FinalProject
         private void playButton_Click(object sender, EventArgs e)
         {
             gameControlPanel.Visible = true;
+            BowAnimationPictureBox.Visible = true;
             ScoreTimer.Enabled = true;
             ArrowPositionTest.Text = $"{arrow.XPos:0.000}, {arrow.YPos:0.000}, {arrow.ZPos:0.000} [X, Y, Z]\n" +
                                      $"{arrow.xVel:0.000}, {arrow.yVel:0.000}, {arrow.zVel:0.000} [X, Y, Z]\n" +
@@ -132,6 +134,7 @@ namespace FinalProject
         private void quitGameButton_Click(object sender, EventArgs e)
         {
             gameControlPanel.Visible = false;
+            BowAnimationPictureBox.Visible = false;
             WindBackgroundWorker.CancelAsync();
             ScoreTimer.Enabled = false;
             Wind.ResetWind();
@@ -148,8 +151,11 @@ namespace FinalProject
         /// <param name="e"></param>
         private void upButton_Click(object sender, EventArgs e)
         {
-            arrow.ChangeAngle("up");
-            angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
+            if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
+            {
+                arrow.ChangeAngle("up");
+                angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
+            }
         }
 
         /// <summary>
@@ -160,8 +166,11 @@ namespace FinalProject
         /// <param name="e"></param>
         private void rightButton_Click(object sender, EventArgs e)
         {
-            arrow.ChangeAngle("right");
-            angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
+            if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
+            {
+                arrow.ChangeAngle("right");
+                angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
+            }
         }
 
         /// <summary>
@@ -172,8 +181,11 @@ namespace FinalProject
         /// <param name="e"></param>
         private void downButton_Click(object sender, EventArgs e)
         {
-            arrow.ChangeAngle("down");
-            angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
+            if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
+            {
+                arrow.ChangeAngle("down");
+                angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
+            }
         }
 
         /// <summary>
@@ -184,8 +196,11 @@ namespace FinalProject
         /// <param name="e"></param>
         private void leftButton_Click(object sender, EventArgs e)
         {
-            arrow.ChangeAngle("left");
-            angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
+            if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
+            {
+                arrow.ChangeAngle("left");
+                angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
+            }
         }
 
         /// <summary>
@@ -196,7 +211,7 @@ namespace FinalProject
         /// <param name="e"></param>
         private void fireButton_Click(object sender, EventArgs e)
         {
-            if (!ArrowInFlightBackgroundWorker.IsBusy)
+            if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
             {
                 arrow.Fire();
                 ArrowPositionBackgroundWorker.RunWorkerAsync();
@@ -215,32 +230,33 @@ namespace FinalProject
         {
             if (gameControlPanel.Visible)
             {
-                if (e.KeyChar == 'w')
+                if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
                 {
-                    arrow.ChangeAngle("up");
-                }
-                else if (e.KeyChar == 'd')
-                {
-                    arrow.ChangeAngle("right");
-                }
-                else if (e.KeyChar == 's')
-                {
-                    arrow.ChangeAngle("down");
-                }
-                else if (e.KeyChar == 'a')
-                {
-                    arrow.ChangeAngle("left");
-                }
-                else if (e.KeyChar == 'f')
-                {
-                    if (!ArrowInFlightBackgroundWorker.IsBusy)
+                    if (e.KeyChar == 'w')
+                    {
+                        arrow.ChangeAngle("up");
+                    }
+                    else if (e.KeyChar == 'd')
+                    {
+                        arrow.ChangeAngle("right");
+                    }
+                    else if (e.KeyChar == 's')
+                    {
+                        arrow.ChangeAngle("down");
+                    }
+                    else if (e.KeyChar == 'a')
+                    {
+                        arrow.ChangeAngle("left");
+                    }
+                    else if (e.KeyChar == 'f')
                     {
                         arrow.Fire();
                         ArrowPositionBackgroundWorker.RunWorkerAsync();
                         ArrowInFlightBackgroundWorker.RunWorkerAsync();
+                        BowAnimationBackgroundWorker.RunWorkerAsync();
                         ArrowInFlightPictureBox.Visible = true;
-                    }
 
+                    }
                 }
 
                 angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {90.0 + (90.0 - arrow.YAngle)}° [X, Y]";
@@ -437,11 +453,28 @@ namespace FinalProject
         {
             int frameIndex = 0;
 
+            System.Threading.Thread.Sleep(600);
+
             for (frameIndex = 0; frameIndex < 6; frameIndex++)
             {
                 arrowInFlight.Update(arrow, this);
-                System.Threading.Thread.Sleep(250);
+                System.Threading.Thread.Sleep(100);
             }
+
+            ArrowInFlightPictureBox.Location = new Point(1000, 1000);
+        }
+
+        private void BowAnimationBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
+        {
+            BowAnimationPictureBox.Image = Properties.Resources.BowAnimation_1;
+            System.Threading.Thread.Sleep(300);
+            BowAnimationPictureBox.Image = Properties.Resources.BowAnimation_2;
+            System.Threading.Thread.Sleep(300);
+            BowAnimationPictureBox.Image = Properties.Resources.BowAnimation_3;
+            System.Threading.Thread.Sleep(300);
+            BowAnimationPictureBox.Image = Properties.Resources.BowAnimation_4;
+            System.Threading.Thread.Sleep(300);
+            BowAnimationPictureBox.Image = Properties.Resources.BowAnimation_0;
         }
     }
 }

@@ -16,12 +16,12 @@ namespace FinalProject
 
         public ArrowInFlight()
         {
-            flightPath0 = new int[,] { { 174, 2, 3, 4, 5 },
-                                       { 233, 2, 3, 4, 5 } };
+            flightPath0 = new int[,] { { 100, 132, 186, 214, 257 },
+                                       { 233, 199, 175, 163, 192 } };
             flightPath1 = new int[,] { { 174, 242, 312, 350, 362 },
                                        { 233, 151, 120, 106, 109 } };
-            flightPath2 = new int[,] { { 174, 2, 3, 4, 5 },
-                                       { 233, 2, 3, 4, 5 } };
+            flightPath2 = new int[,] { { 310, 377, 448, 514, 555 },
+                                       { 233, 197, 172, 168, 199 } };
             xIndex = 0;
         } 
 
@@ -61,11 +61,13 @@ namespace FinalProject
                         switch (DetermineFlightPath(arrow))
                         {
                             case 0:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path0_0;
                                 break;
                             case 1:
                                 mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_0;
                                 break;
                             case 2:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path2_0;
                                 break;
                             default:
                                 Reset(mainWindow);
@@ -78,11 +80,13 @@ namespace FinalProject
                         switch (DetermineFlightPath(arrow))
                         {
                             case 0:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path0_1;
                                 break;
                             case 1:
                                 mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_1;
                                 break;
                             case 2:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path2_1;
                                 break;
                             default:
                                 Reset(mainWindow);
@@ -95,11 +99,13 @@ namespace FinalProject
                         switch (DetermineFlightPath(arrow))
                         {
                             case 0:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path0_2;
                                 break;
                             case 1:
                                 mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_2;
                                 break;
                             case 2:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path2_2;
                                 break;
                             default:
                                 Reset(mainWindow);
@@ -112,11 +118,13 @@ namespace FinalProject
                         switch (DetermineFlightPath(arrow))
                         {
                             case 0:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path0_3;
                                 break;
                             case 1:
                                 mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_3;
                                 break;
                             case 2:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path2_3;
                                 break;
                             default:
                                 Reset(mainWindow);
@@ -129,11 +137,13 @@ namespace FinalProject
                         switch (DetermineFlightPath(arrow))
                         {
                             case 0:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path0_4;
                                 break;
                             case 1:
                                 mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path1_4;
                                 break;
                             case 2:
+                                mainWindow.ArrowInFlightPictureBox.Image = Properties.Resources.ArrowInFlight_Path2_4;
                                 break;
                             default:
                                 Reset(mainWindow);
