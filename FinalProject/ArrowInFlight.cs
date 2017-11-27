@@ -14,6 +14,9 @@ namespace FinalProject
         private int[,] flightPath2;
         private int xIndex;
 
+        /// <summary>
+        /// Constructor that makes the flight path coordinates
+        /// </summary>
         public ArrowInFlight()
         {
             flightPath0 = new int[,] { { 100, 132, 186, 214, 257 },
@@ -25,6 +28,11 @@ namespace FinalProject
             xIndex = 0;
         } 
 
+        /// <summary>
+        /// Function draws the picture at the new location.
+        /// </summary>
+        /// <param name="arrow">Arrow stats to determine which path to use</param>
+        /// <param name="mainWindow">Reference to the main form to access the parts</param>
         public override void Draw(Arrow arrow, mainWindow mainWindow)
         {
             switch (DetermineFlightPath(arrow))
@@ -46,7 +54,11 @@ namespace FinalProject
                     break;
             }
         }
-
+        /// <summary>
+        /// Function decides which frame to use.
+        /// </summary>
+        /// <param name="arrow">Arrow stats to determine which path to use</param>
+        /// <param name="mainWindow">Reference to main form to access the parts</param>
         public override void Update(Arrow arrow, mainWindow mainWindow)
         {
             if (DetermineFlightPath(arrow) == -1)
@@ -160,6 +172,10 @@ namespace FinalProject
             }
         }
 
+        /// <summary>
+        /// Function resets the animation, just in case.
+        /// </summary>
+        /// <param name="mainWindow"></param>
         public override void Reset(mainWindow mainWindow)
         {
             xIndex = 0;

@@ -32,12 +32,54 @@ namespace FinalProject
         Arrow arrow = new Arrow();
         ScoreTime scoreTime = new ScoreTime();
         ArrowInFlight arrowInFlight = new ArrowInFlight();
+        ArrowInTarget arrowInTarget = new ArrowInTarget();
+        string[] scores = new string[6] { "HIGHSCORES",
+                                          "AAA 99:00:00",
+                                          "BBB 99:00:01",
+                                          "CCC 99:00:02",
+                                          "DDD 99:00:03",
+                                          "EEE 99:00:04" };
+        string[] config = new string[2] { "difficulty: 0",
+                                          "cheat: 0" };
 
         public mainWindow()
         {
             InitializeComponent();
-            ArrowInFlightPictureBox.Parent = BowAnimationPictureBox;
             BowAnimationPictureBox.Parent = BackgroundPictureBox;
+            ArrowInFlightPictureBox.Parent = BowAnimationPictureBox;
+            StuckArrowPictureBox0.Parent = BowAnimationPictureBox;
+            StuckArrowPictureBox1.Parent = BowAnimationPictureBox;
+            StuckArrowPictureBox2.Parent = BowAnimationPictureBox;
+
+            try
+            {
+                scores = System.IO.File.ReadAllLines(@"highscores.txt");
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                System.IO.File.WriteAllLines(@"highscores.txt", scores);
+            }
+
+            try
+            {
+                config = System.IO.File.ReadAllLines(@"config.txt");
+            }
+            catch (System.IO.FileNotFoundException)
+            {
+                System.IO.File.WriteAllLines(@"config.txt", config);
+            }
+
+            if (config[0].Substring(12, 1).Equals("1"))
+            {
+                if (!WindBackgroundWorker.IsBusy)
+                {
+                    WindBackgroundWorker.RunWorkerAsync();
+                }
+            }
+            if (config[1].Substring(7, 1).Equals("1"))
+            {
+                CheatsButton.Text = "Enable Cheats (All shots hit)";
+            }
         }
 
         /// <summary>
@@ -66,29 +108,9 @@ namespace FinalProject
         private void scoreButton_Click(object sender, EventArgs e)
         {
             int scoreIndex = 0;
-            string[] lines = new string[11] { "HIGHSCORES",
-                                              "\n",
-                                              "AAA 00:00:00",
-                                              "\n",
-                                              "BBB 00:00:01",
-                                              "\n",
-                                              "CCC 00:00:02",
-                                              "\n",
-                                              "DDD 00:00:03",
-                                              "\n",
-                                              "EEE 00:00:04" };
-
-            try
-            {
-                lines = System.IO.File.ReadAllLines(@"highscores.txt");
-            }
-            catch (System.IO.FileNotFoundException)
-            {
-                System.IO.File.WriteAllLines(@"highscores.txt", lines);
-            }
 
             ScoresLabel.Text = "";
-            foreach (string line in lines)
+            foreach (string line in scores)
             {
                 if (scoreIndex < 22)
                 {
@@ -99,6 +121,7 @@ namespace FinalProject
 
             BackgroundPictureBox.Visible = false;
             ScoresControlPanel.Visible = true;
+            ScoresLabel.Visible = true;
         }
 
         /// <summary>
@@ -141,6 +164,7 @@ namespace FinalProject
             scoreTime.Reset();
             ScoreTimerLabel.Text = "00:00:00";
             ArrowPositionBackgroundWorker.CancelAsync();
+            arrowInTarget.Reset(this);
         }
 
         /// <summary>
@@ -151,11 +175,8 @@ namespace FinalProject
         /// <param name="e"></param>
         private void upButton_Click(object sender, EventArgs e)
         {
-            if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
-            {
-                arrow.ChangeAngle("up");
-                angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
-            }
+            arrow.ChangeAngle("up");
+            angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {90.0 + (90.0 - arrow.YAngle)}° [X, Y]";
         }
 
         /// <summary>
@@ -166,11 +187,8 @@ namespace FinalProject
         /// <param name="e"></param>
         private void rightButton_Click(object sender, EventArgs e)
         {
-            if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
-            {
-                arrow.ChangeAngle("right");
-                angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
-            }
+            arrow.ChangeAngle("right");
+            angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {90.0 + (90.0 - arrow.YAngle)}° [X, Y]";
         }
 
         /// <summary>
@@ -181,11 +199,8 @@ namespace FinalProject
         /// <param name="e"></param>
         private void downButton_Click(object sender, EventArgs e)
         {
-            if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
-            {
-                arrow.ChangeAngle("down");
-                angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
-            }
+            arrow.ChangeAngle("down");
+            angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {90.0 + (90.0 - arrow.YAngle)}° [X, Y]";
         }
 
         /// <summary>
@@ -196,11 +211,8 @@ namespace FinalProject
         /// <param name="e"></param>
         private void leftButton_Click(object sender, EventArgs e)
         {
-            if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
-            {
-                arrow.ChangeAngle("left");
-                angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {arrow.YAngle}° [X, Y]";
-            }
+            arrow.ChangeAngle("left");
+            angleReading.Text = $"Starting Angle: {arrow.XAngle}°, {90.0 + (90.0 - arrow.YAngle)}° [X, Y]";
         }
 
         /// <summary>
@@ -213,9 +225,14 @@ namespace FinalProject
         {
             if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
             {
+                if (config[1].Substring(7, 1).Equals("1"))
+                {
+                    arrowInTarget.Cheat(this);
+                }
                 arrow.Fire();
                 ArrowPositionBackgroundWorker.RunWorkerAsync();
                 ArrowInFlightBackgroundWorker.RunWorkerAsync();
+                BowAnimationBackgroundWorker.RunWorkerAsync();
                 ArrowInFlightPictureBox.Visible = true;
             }
         }
@@ -230,32 +247,36 @@ namespace FinalProject
         {
             if (gameControlPanel.Visible)
             {
-                if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
+
+                if (e.KeyChar == 'w')
                 {
-                    if (e.KeyChar == 'w')
+                    arrow.ChangeAngle("up");
+                }
+                else if (e.KeyChar == 'd')
+                {
+                    arrow.ChangeAngle("right");
+                }
+                else if (e.KeyChar == 's')
+                {
+                    arrow.ChangeAngle("down");
+                }
+                else if (e.KeyChar == 'a')
+                {
+                    arrow.ChangeAngle("left");
+                }
+                else if (e.KeyChar == 'f')
+                {
+                    if (!ArrowInFlightBackgroundWorker.IsBusy && !ArrowPositionBackgroundWorker.IsBusy && !BowAnimationBackgroundWorker.IsBusy)
                     {
-                        arrow.ChangeAngle("up");
-                    }
-                    else if (e.KeyChar == 'd')
-                    {
-                        arrow.ChangeAngle("right");
-                    }
-                    else if (e.KeyChar == 's')
-                    {
-                        arrow.ChangeAngle("down");
-                    }
-                    else if (e.KeyChar == 'a')
-                    {
-                        arrow.ChangeAngle("left");
-                    }
-                    else if (e.KeyChar == 'f')
-                    {
+                        if (config[1].Substring(7, 1).Equals("1"))
+                        {
+                            arrowInTarget.Cheat(this);
+                        }
                         arrow.Fire();
                         ArrowPositionBackgroundWorker.RunWorkerAsync();
                         ArrowInFlightBackgroundWorker.RunWorkerAsync();
                         BowAnimationBackgroundWorker.RunWorkerAsync();
                         ArrowInFlightPictureBox.Visible = true;
-
                     }
                 }
 
@@ -369,6 +390,9 @@ namespace FinalProject
         private void ArrowPositionBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BackgroundWorker worker = sender as BackgroundWorker;
+
+            System.Threading.Thread.Sleep(600);
+
             while (!arrow.Redrawn)
             {
                 if (worker.CancellationPending == true)
@@ -379,7 +403,21 @@ namespace FinalProject
                 else if (!arrow.Stationary)
                 {
                     arrow.Update();
+                    arrowInTarget.Update(arrow, this);
                     worker.ReportProgress(0);
+
+                    if (arrowInTarget.TargetHit0 && arrowInTarget.TargetHit1 && arrowInTarget.TargetHit2)
+                    {
+                        WindBackgroundWorker.CancelAsync();
+                        Wind.ResetWind();
+                        ScoreTimer.Enabled = false;
+                        scoreTime.RecordScore(ref scores, this);
+                        gameControlPanel.Visible = false;
+                        BowAnimationPictureBox.Visible = false;
+                        scoreTime.Reset();
+                        ScoreTimerLabel.Text = "00:00:00";
+                        arrowInTarget.Reset(this);
+                    }
                 }
                 System.Threading.Thread.Sleep(4);
             }
@@ -409,6 +447,8 @@ namespace FinalProject
             WindBackgroundWorker.CancelAsync();
             Wind.ResetWind();
             windReading.Text = $"Wind: {Wind.XMag:0.000}m/s, {Wind.ZMag:0.000}m/s [X, Z]";
+            config[0] = "difficulty: 0";
+            System.IO.File.WriteAllLines(@"config.txt", config);
             SettingsPanel.Visible = false;
         }
 
@@ -423,6 +463,8 @@ namespace FinalProject
             {
                 WindBackgroundWorker.RunWorkerAsync();
             }
+            config[0] = "difficulty: 1";
+            System.IO.File.WriteAllLines(@"config.txt", config);
             SettingsPanel.Visible = false;
         }
 
@@ -435,20 +477,35 @@ namespace FinalProject
         {
             BackgroundPictureBox.Visible = true;
             ScoresControlPanel.Visible = false;
+            ScoresLabel.Visible = false;
         }
 
+        /// <summary>
+        /// Toggle for cheat mode.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void CheatsButton_Click(object sender, EventArgs e)
         {
             if (CheatsButton.Text == "Enable Cheats (All shots hit)")
             {
                 CheatsButton.Text = "Disable Cheats (Normal Shots)";
+                config[1] = "cheat: 1";
+                System.IO.File.WriteAllLines(@"config.txt", config);
             }
             else
             {
                 CheatsButton.Text = "Enable Cheats (All shots hit)";
+                config[1] = "cheat: 0";
+                System.IO.File.WriteAllLines(@"config.txt", config);
             }
         }
 
+        /// <summary>
+        /// Plays the animation of the arrow flying after begin shot.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void ArrowInFlightBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             int frameIndex = 0;
@@ -464,6 +521,11 @@ namespace FinalProject
             ArrowInFlightPictureBox.Location = new Point(1000, 1000);
         }
 
+        /// <summary>
+        /// Plays the animation of the bow shooting the arrow.
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
         private void BowAnimationBackgroundWorker_DoWork(object sender, DoWorkEventArgs e)
         {
             BowAnimationPictureBox.Image = Properties.Resources.BowAnimation_1;

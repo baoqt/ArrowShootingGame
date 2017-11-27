@@ -52,6 +52,7 @@
             this.tableLayoutPanel3 = new System.Windows.Forms.TableLayoutPanel();
             this.quitGameButton = new System.Windows.Forms.Button();
             this.tableLayoutPanel1 = new System.Windows.Forms.TableLayoutPanel();
+            this.CompassPictureBox = new System.Windows.Forms.PictureBox();
             this.angleReading = new System.Windows.Forms.Label();
             this.windReading = new System.Windows.Forms.Label();
             this.DataPanel1 = new System.Windows.Forms.Panel();
@@ -66,11 +67,13 @@
             this.BackButton = new System.Windows.Forms.Button();
             this.ScoresLabel = new System.Windows.Forms.Label();
             this.ArrowInFlightBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.BowAnimationBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.StuckArrowPictureBox1 = new System.Windows.Forms.PictureBox();
+            this.StuckArrowPictureBox0 = new System.Windows.Forms.PictureBox();
             this.ArrowInFlightPictureBox = new System.Windows.Forms.PictureBox();
             this.BowAnimationPictureBox = new System.Windows.Forms.PictureBox();
-            this.CompassPictureBox = new System.Windows.Forms.PictureBox();
             this.BackgroundPictureBox = new System.Windows.Forms.PictureBox();
-            this.BowAnimationBackgroundWorker = new System.ComponentModel.BackgroundWorker();
+            this.StuckArrowPictureBox2 = new System.Windows.Forms.PictureBox();
             this.mainMenuControlPanel.SuspendLayout();
             this.mainMenuLayoutPanel.SuspendLayout();
             this.mainMenuInnerLayoutPanel.SuspendLayout();
@@ -80,13 +83,16 @@
             this.ganeInnerLayoutPanel2.SuspendLayout();
             this.tableLayoutPanel3.SuspendLayout();
             this.tableLayoutPanel1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).BeginInit();
             this.DataPanel1.SuspendLayout();
             this.SettingsPanel.SuspendLayout();
             this.ScoresControlPanel.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.StuckArrowPictureBox1)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StuckArrowPictureBox0)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.ArrowInFlightPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BowAnimationPictureBox)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StuckArrowPictureBox2)).BeginInit();
             this.SuspendLayout();
             // 
             // WindBackgroundWorker
@@ -373,6 +379,16 @@
             this.tableLayoutPanel1.Size = new System.Drawing.Size(172, 190);
             this.tableLayoutPanel1.TabIndex = 1;
             // 
+            // CompassPictureBox
+            // 
+            this.CompassPictureBox.Image = global::FinalProject.Properties.Resources.CompassNorth;
+            this.CompassPictureBox.Location = new System.Drawing.Point(0, 28);
+            this.CompassPictureBox.Margin = new System.Windows.Forms.Padding(0);
+            this.CompassPictureBox.Name = "CompassPictureBox";
+            this.CompassPictureBox.Size = new System.Drawing.Size(172, 134);
+            this.CompassPictureBox.TabIndex = 15;
+            this.CompassPictureBox.TabStop = false;
+            // 
             // angleReading
             // 
             this.angleReading.AutoSize = true;
@@ -518,6 +534,30 @@
             // 
             this.ArrowInFlightBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.ArrowInFlightBackgroundWorker_DoWork);
             // 
+            // BowAnimationBackgroundWorker
+            // 
+            this.BowAnimationBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BowAnimationBackgroundWorker_DoWork);
+            // 
+            // StuckArrowPictureBox1
+            // 
+            this.StuckArrowPictureBox1.BackColor = System.Drawing.Color.Transparent;
+            this.StuckArrowPictureBox1.Image = global::FinalProject.Properties.Resources.StuckArrow1;
+            this.StuckArrowPictureBox1.Location = new System.Drawing.Point(1000, 1000);
+            this.StuckArrowPictureBox1.Name = "StuckArrowPictureBox1";
+            this.StuckArrowPictureBox1.Size = new System.Drawing.Size(50, 50);
+            this.StuckArrowPictureBox1.TabIndex = 18;
+            this.StuckArrowPictureBox1.TabStop = false;
+            // 
+            // StuckArrowPictureBox0
+            // 
+            this.StuckArrowPictureBox0.BackColor = System.Drawing.Color.Transparent;
+            this.StuckArrowPictureBox0.Image = global::FinalProject.Properties.Resources.StuckArrow0;
+            this.StuckArrowPictureBox0.Location = new System.Drawing.Point(1000, 1000);
+            this.StuckArrowPictureBox0.Name = "StuckArrowPictureBox0";
+            this.StuckArrowPictureBox0.Size = new System.Drawing.Size(50, 50);
+            this.StuckArrowPictureBox0.TabIndex = 17;
+            this.StuckArrowPictureBox0.TabStop = false;
+            // 
             // ArrowInFlightPictureBox
             // 
             this.ArrowInFlightPictureBox.BackColor = System.Drawing.Color.Transparent;
@@ -542,16 +582,6 @@
             this.BowAnimationPictureBox.TabStop = false;
             this.BowAnimationPictureBox.Visible = false;
             // 
-            // CompassPictureBox
-            // 
-            this.CompassPictureBox.Image = global::FinalProject.Properties.Resources.CompassNorth;
-            this.CompassPictureBox.Location = new System.Drawing.Point(0, 28);
-            this.CompassPictureBox.Margin = new System.Windows.Forms.Padding(0);
-            this.CompassPictureBox.Name = "CompassPictureBox";
-            this.CompassPictureBox.Size = new System.Drawing.Size(172, 134);
-            this.CompassPictureBox.TabIndex = 15;
-            this.CompassPictureBox.TabStop = false;
-            // 
             // BackgroundPictureBox
             // 
             this.BackgroundPictureBox.BackColor = System.Drawing.SystemColors.Control;
@@ -563,9 +593,15 @@
             this.BackgroundPictureBox.TabIndex = 9;
             this.BackgroundPictureBox.TabStop = false;
             // 
-            // BowAnimationBackgroundWorker
+            // StuckArrowPictureBox2
             // 
-            this.BowAnimationBackgroundWorker.DoWork += new System.ComponentModel.DoWorkEventHandler(this.BowAnimationBackgroundWorker_DoWork);
+            this.StuckArrowPictureBox2.BackColor = System.Drawing.Color.Transparent;
+            this.StuckArrowPictureBox2.Image = global::FinalProject.Properties.Resources.StuckArrow2;
+            this.StuckArrowPictureBox2.Location = new System.Drawing.Point(1000, 1000);
+            this.StuckArrowPictureBox2.Name = "StuckArrowPictureBox2";
+            this.StuckArrowPictureBox2.Size = new System.Drawing.Size(50, 50);
+            this.StuckArrowPictureBox2.TabIndex = 19;
+            this.StuckArrowPictureBox2.TabStop = false;
             // 
             // mainWindow
             // 
@@ -573,6 +609,9 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
             this.ClientSize = new System.Drawing.Size(1001, 601);
+            this.Controls.Add(this.StuckArrowPictureBox2);
+            this.Controls.Add(this.StuckArrowPictureBox1);
+            this.Controls.Add(this.StuckArrowPictureBox0);
             this.Controls.Add(this.ArrowInFlightPictureBox);
             this.Controls.Add(this.BowAnimationPictureBox);
             this.Controls.Add(this.ScoresLabel);
@@ -598,15 +637,18 @@
             this.tableLayoutPanel3.ResumeLayout(false);
             this.tableLayoutPanel1.ResumeLayout(false);
             this.tableLayoutPanel1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).EndInit();
             this.DataPanel1.ResumeLayout(false);
             this.DataPanel1.PerformLayout();
             this.SettingsPanel.ResumeLayout(false);
             this.SettingsPanel.PerformLayout();
             this.ScoresControlPanel.ResumeLayout(false);
+            ((System.ComponentModel.ISupportInitialize)(this.StuckArrowPictureBox1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StuckArrowPictureBox0)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.ArrowInFlightPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BowAnimationPictureBox)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.CompassPictureBox)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.BackgroundPictureBox)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.StuckArrowPictureBox2)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -634,7 +676,7 @@
         private System.Windows.Forms.Button upButton;
         private System.Windows.Forms.TableLayoutPanel tableLayoutPanel3;
         private System.Windows.Forms.Button quitGameButton;
-        public System.Windows.Forms.PictureBox BackgroundPictureBox;
+        private System.Windows.Forms.PictureBox BackgroundPictureBox;
         private System.Windows.Forms.Panel SettingsPanel;
         private System.Windows.Forms.Button HardModeButton;
         private System.Windows.Forms.Button NormalModeButton;
@@ -654,6 +696,9 @@
         private System.ComponentModel.BackgroundWorker ArrowInFlightBackgroundWorker;
         private System.Windows.Forms.PictureBox BowAnimationPictureBox;
         private System.ComponentModel.BackgroundWorker BowAnimationBackgroundWorker;
+        public System.Windows.Forms.PictureBox StuckArrowPictureBox0;
+        public System.Windows.Forms.PictureBox StuckArrowPictureBox1;
+        public System.Windows.Forms.PictureBox StuckArrowPictureBox2;
     }
 }
 

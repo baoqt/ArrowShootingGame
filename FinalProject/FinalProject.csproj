@@ -32,6 +32,7 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Microsoft.VisualBasic" />
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -174,6 +175,15 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\BowAnimation_4.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StuckArrow0.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StuckArrow1.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\StuckArrow2.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
