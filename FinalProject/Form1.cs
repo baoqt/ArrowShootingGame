@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Text;
@@ -537,6 +538,37 @@ namespace FinalProject
             BowAnimationPictureBox.Image = Properties.Resources.BowAnimation_4;
             System.Threading.Thread.Sleep(300);
             BowAnimationPictureBox.Image = Properties.Resources.BowAnimation_0;
+        }
+        
+        /// <summary>
+        /// Function opens up the README for the user
+        /// </summary>
+        /// <param name="sender"></param>
+        /// <param name="e"></param>
+        private void mainWindow_KeyDown(object sender, KeyEventArgs e)
+        {
+            if (e.KeyCode == Keys.F1)
+            {
+                try
+                {
+                    Process.Start(@"README.txt");
+                }
+                catch (Win32Exception exception)
+                {
+                    string[] readmeText = new string[] { "Up, down, left, and right are also bound to 'w', 'a', 's', and 'd', respectively",
+                                                         "Fire is also bound to 'f'.",
+                                                         " ",
+                                                         "Change the starting angle of the arrow to hit the three targets.",
+                                                         "The wind option makes this much more difficult.",
+                                                         " ",
+                                                         "Hint: The targets are at 95, 0",
+                                                         "			 90, 95",
+                                                         "		     and 89, 93 with the wind disabled." };
+                    System.IO.File.WriteAllLines(@"README.txt", readmeText);
+
+                    Process.Start(@"README.txt");
+                }
+            }
         }
     }
 }

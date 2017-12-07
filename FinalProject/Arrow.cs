@@ -9,10 +9,11 @@ using System.Threading.Tasks;
 /// RedID: 818209256
 /// Date: 10.28.2017
 /// Drag eqation, -kV^2, from https://sites.google.com/site/technicalarchery/technical-discussions-1/trajectory
+/// Compare to example from https://msdn.microsoft.com/en-us/library/system.icomparable.compareto(v=vs.110).aspx
 /// </summary>
 namespace FinalProject
 {
-    class Arrow : BackgroundObjects
+    class Arrow : BackgroundObjects, IComparable
     {
         private double xPos;
         private double yPos;
@@ -241,6 +242,63 @@ namespace FinalProject
             return $"{XPos:0.000}, {YPos:0.000}, {ZPos:0.000} POS[X, Y, Z]\n" +
                    $"{xVel:0.000}, {yVel:0.000}, {zVel:0.000} VEL[X, Y, Z]\n" +
                    $"{xAcc:0.000}, {yAcc:0.000}, {zAcc:0.000} ACC[X, Y, Z]\n";
+        }
+
+        /// <summary>
+        /// Function compares two arrows.
+        /// </summary>
+        /// <param name="obj"></param>
+        /// <returns></returns>
+        int IComparable.CompareTo(object obj)
+        {
+            if (obj == null)
+            {
+                return 1;
+            }
+            if (obj is Arrow other)
+            {
+                if (this.xPos.CompareTo(other.xPos) != 0)
+                {
+                    if (this.yPos.CompareTo(other.yPos) != 0)
+                    {
+                        if (this.zPos.CompareTo(other.zPos) != 0)
+                        {
+                            if (this.xVel.CompareTo(other.xVel) != 0)
+                            {
+                                if (this.yVel.CompareTo(other.yVel) != 0)
+                                {
+                                    if (this.zVel.CompareTo(other.zVel) != 0)
+                                    {
+                                        if (this.xAcc.CompareTo(other.xAcc) != 0)
+                                        {
+                                            if (this.yAcc.CompareTo(other.yAcc) != 0)
+                                            {
+                                                if (this.zAcc.CompareTo(other.zAcc) != 0)
+                                                {
+                                                    return 0;
+                                                }
+                                                return this.zAcc.CompareTo(other.zAcc);
+                                            }
+                                            return this.yAcc.CompareTo(other.yAcc);
+                                        }
+                                        return this.xAcc.CompareTo(other.xAcc);
+                                    }
+                                    return this.zVel.CompareTo(other.zVel);
+                                }
+                                return this.yVel.CompareTo(other.yVel);
+                            }
+                            return this.xVel.CompareTo(other.xVel);
+                        }
+                        return this.zPos.CompareTo(other.zPos);
+                    }
+                    return this.yPos.CompareTo(other.yPos);
+                }
+                return this.xPos.CompareTo(other.xPos);
+            }
+            else
+            {
+                throw new ArgumentException("Object is not an Arrow");
+            }
         }
     }
 }

@@ -626,6 +626,7 @@
             this.Name = "mainWindow";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Target Shooting";
+            this.KeyDown += new System.Windows.Forms.KeyEventHandler(this.mainWindow_KeyDown);
             this.KeyPress += new System.Windows.Forms.KeyPressEventHandler(this.mainWindow_KeyPress);
             this.mainMenuControlPanel.ResumeLayout(false);
             this.mainMenuLayoutPanel.ResumeLayout(false);
