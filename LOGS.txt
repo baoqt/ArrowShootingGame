@@ -1,0 +1,33 @@
+I did a lot of work really early on in the project before we knew we had to keep logs.
+It was mostly setting up how I wanted the UI to be, and some basic functionality in the buttons switching between UI elements.
+The rest of the logs are from my github push history.
+
+NOV 10, 2017:
+Removed most of the table panels for easier UI stacking.
+Removed z boundary in the field, letting it go until it hits the ground.
+Fixed up some comments.
+
+NOV 22, 2017:
+Added options menu and highscores menu.
+Implemented part of the file I/O for highscores.
+
+NOV 23, 2017:
+Added visual representation of wind direction in the compass display.
+Reorganized some classes into inheritance hierarchy.
+Set up some structure for animation classes.
+
+NOV 24, 2017:
+Added visual representation of arrow in flight.
+Only one path in right now.
+
+NOV 25, 2017:
+Added other flight path animations and bow drawing animations.
+
+NOV 26, 2017:
+Implemented high scores and settings.
+Implemented visual feedback for actually hitting the target.
+Updated README.txt.
+
+DEC 6, 2017:
+Implemented CompareTo method for arrows
+Also added F1 opening the README file that explains everything.
